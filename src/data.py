@@ -105,8 +105,7 @@ class LanguageManager(object):
     async def is_lang_set(self, ctx: Context) -> bool:
         return str(ctx.guild.id) in self._stbl
 
-    async def get_string(self, ctx: Context, *identifiers: str) -> Optional[
-        str]:
+    async def get_string(self, ctx: Context, *identifiers: str) -> Optional[str]:
         lang = await self.get_lang(ctx)
         layer = self._strtbl
         for identifier in identifiers:
@@ -189,7 +188,7 @@ class DatabaseManager(object):
             self._exp_data = tuple(map(int, f.read().split(',')))
 
     @property
-    def MAX_LEVEL(self):
+    def max_level(self):
         return len(self._exp_data)
 
     def exp_from_level(self, level: int) -> int:
@@ -199,7 +198,7 @@ class DatabaseManager(object):
         temp = tuple(takewhile(lambda x: exp >= x, self._exp_data))
         level = len(temp)
         leftover = exp - temp[-1]
-        if level == self.MAX_LEVEL and leftover:
+        if level == self.max_level and leftover:
             raise ValueError
         return level, leftover
 

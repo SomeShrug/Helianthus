@@ -325,9 +325,9 @@ class Analytics(Cog):
     async def exp(self, ctx: Context, st_lvl: int, exp: int, ed_lvl: int, oath: Optional[sane_flag] = ''):
         oath = 'OATH' == oath
 
-        if not 1 <= st_lvl <= DBMAN.MAX_LEVEL:
+        if not 1 <= st_lvl <= DBMAN.max_level:
             msg = _('Please enter a valid starting level.')
-        elif not 1 <= ed_lvl <= DBMAN.MAX_LEVEL:
+        elif not 1 <= ed_lvl <= DBMAN.max_level:
             msg = _('Please enter a valid target level.')
         elif ed_lvl <= st_lvl:
             msg = _('Please enter a target level greater than the current level.')
