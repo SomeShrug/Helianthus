@@ -1,0 +1,417 @@
+{
+  "setchlang": {
+    "error": {
+      "KR": "입력하신 언어는 지원하지않습니다.\n사용할 수 있는 언어는 다음과 같습니다.\n한국어 - `KR`\n영어 - `EN`\n일본어 - `JP`",
+      "EN": "The language you have selected is not supported.\nSupported languages are:\nKorean - `KR`\nEnglish - `EN`\nJapanese - `JP`",
+      "JP": "入力して下さった言語は対応できていません。\n支援している言語には以下の物があります。\n韓国語 - `KR`,\n英語 - `EN`,\n日本語 - `JP`"
+    },
+    "success": {
+      "KR": "성공적으로 채널의 언어가 설정되었습니다!",
+      "EN": "Successfully set channel language!",
+      "JP": "成功的にチャンネルの言語が設定されました！"
+    }
+  },
+  "setlang": {
+    "success": {
+      "KR": "성공적으로 서버의 언어가 설정되었습니다!",
+      "EN": "Successfully set server language!",
+      "JP": "成功的にサーバの言語が設定されました！"
+    },
+    "error": {
+      "EN": "The language you have selected is unsupported.\nSupported languages are:\n한국어 - `KR`\nEnglish - `EN`\n日本語 - `JP`"
+    }
+  },
+  "weibo": {
+    "disable": {
+      "KR": "{0} 채널의 웨이보 뉴스 구독 기능을 비활성화했습니다.",
+      "EN": "Disabled news feed feature on {0} channel.",
+      "JP": "{0} チャンネルのweiboニュース購読機能をオフにしました。"
+    },
+    "enable": {
+      "KR": "{0} 채널의 웨이보 뉴스 구독 기능을 활성화했습니다.",
+      "EN": "Enabled news feed feature on {0} channel.",
+      "JP": "{0} チャンネルのweiboニュース購読機能をオフにしました。"
+    }
+  },
+  "delchlang": {
+    "success": {
+      "KR": "성공적으로 채널의 언어설정이 삭제되었습니다!",
+      "EN": "Successfully removed channel's language setting!",
+      "JP": "チャンネルの言語設定が成功的に削除されました！"
+    },
+    "error": {
+      "KR": "채널의 언어설정이 존재하지 않습니다.",
+      "EN": "Channel's language setting doesn't exist.",
+      "JP": "チャンネルの言語設定が存在しません。"
+    }
+  },
+  "help": {
+    "setlang": {
+      "KR": "서버의 언어를 설정합니다. 이 명령어는 **서버 관리자**만 사용 할 수 있습니다.\nex) `{0}setlang KR`, `{0}setlang JP`, `{0}setlang EN`",
+      "EN": "Set the language of server. This command needs **server administrator** permission.\nex) `{0}setlang KR`, `{0}setlang JP`, `{0}setlang EN`",
+      "JP": "サーバの言語を設定します。このコマンドはサーバ管理者だけが使用可能です。\nex) `{0}setlang KR`, `{0}setlang JP`, `{0}setlang EN`"
+    },
+    "setchlang": {
+      "KR": "채널의 언어를 설정합니다. 이 명령어는 **서버 관리자**만 사용 할 수 있습니다.\nex) `{0}setchlang KR`, `{0}setchlang JP`, `{0}setchlang EN`",
+      "EN": "Set the language of channel. This command needs **server administrator** permission.\nex) `{0}setchlang KR`, `{0}setchlang JP`, `{0}setchlang EN`",
+      "JP": "チャンネルの言語を設定します。このコマンドはサーバ管理者だけが使用可能です。\nex) `{0}setchlang KR`, `{0}setchlang JP`, `{0}setchlang EN`"
+    },
+    "delchlang": {
+      "KR": "채널의 언어설정을 삭제합니다. 이 명령어는 **서버 관리자**만 사용 할 수 있습니다.",
+      "EN": "Delete channel's language setting. This command needs **server administrator** permission.",
+      "JP": "チャンネルの言語設定を削除します。このコマンドはサーバ管理者だけが使用可能です。"
+    },
+    "doll": {
+      "KR": "입력한 제조시간에 대한 인형정보를 보여줍니다.\nex) `{0}doll 03:20`, `{0}doll 0320`, `{0}doll 320`",
+      "EN": "Shows the T-Doll information about product time.\nex) `{0}doll 03:20`, `{0}doll 0320`, `{0}doll 320`",
+      "JP": "入力した製造時間に関する人形情報を見せます。\nex) `{0}doll 03:20`, `{0}doll 0320`, `{0}doll 320`"
+    },
+    "random": {
+      "KR": "랜덤으로 인형 하나를 보여줍니다.",
+      "EN": "Shows a one random T-Doll.",
+      "JP": "ランダムに人形一つを見せます。"
+    },
+    "info": {
+      "KR": "입력한 검색어의 인형정보를 보여줍니다..\nex) `{0}info 수오미`",
+      "EN": "Shows the information of specific gun.\nex) `{0}info g11`",
+      "JP": "入力した検索ワードに関する人形情報を見せます。\nex) `{0}info g11`"
+    },
+    "equip": {
+      "KR": "입력한 제조시간에 대한 장비정보를 보여줍니다.\nex) `{0}equip 00:55`, `{0}equip 0055`, `{0}equip 55`",
+      "EN": "Shows the equipment information about product time.\nex) `{0}equip 00:55`, `{0}equip 0055`, `{0}equip 55`",
+      "JP": "入力した製造時間に関する装備情報を見せます。\nex) `{0}equip 00:55`, `{0}equip 0055`, `{0}equip 55`"
+    },
+    "exp": {
+      "KR": "목표 레벨까지 필요한 작전보고서를 알려줍니다.\nex) `{0}exp 현재레벨 현재경험치 목표레벨 서약여부(아무단어 입력)`\n`{0}exp 1 0 120 서약함`, `{0}exp 1 0 120`",
+      "EN": "Shows the reports you need to reach the target level.\nex) `{0}exp current_lv current_exp target_lv OATH(Type any word here)`\n`{0}exp 1 0 120 oath`, `{0}exp 1 0 120`",
+      "JP": "目標レベルに至るまで必要な作戦報告書の数を知らせます。\nex) `{0}exp 現在のレベル 現在の経験値 目標レベル 婚約有無(セレクティブ)`\n`{0}exp 1 0 120 婚約`, `{0}exp 1 0 120`"
+    },
+    "winfo": {
+      "KR": "자신의 소녀전선 정보를 입력합니다.",
+      "EN": "Enter your Girls Frontline informations. (Server, Nickname, UID)",
+      "JP": "自分の少女前線の情報を入力します。"
+    },
+    "ulist": {
+      "KR": "특정 서버의 친구코드 목록을 불러옵니다.",
+      "EN": "Shows the list of specific server's users informations.",
+      "JP": "特定サーバの友達コード目録を呼び込みます。"
+    },
+    "currency": {
+      "KR": "결제 시 환율정보를 알려줍니다.",
+      "EN": "Shows currency informations.",
+      "JP": "課金する時の為替レートを見せます。"
+    },
+    "voicequiz": {
+      "KR": "보이스 퀴즈를 시작합니다.",
+      "EN": "Play voice quiz on discord voice channel.",
+      "JP": "ボイスクイズを始めます。"
+    },
+    "leaderboard": {
+      "KR": "보이스 퀴즈 리더보드를 보여줍니다.",
+      "EN": "Shows leaderboard of voice quiz",
+      "JP": "ボイスクイズのリーダーボードを見せます。"
+    },
+    "choose": {
+      "KR": "봇이 여러 항목 중 하나를 선택합니다.\nex) `{0}choose 수오미,라플비,K2`",
+      "EN": "Chooses a thing from a list of things\nex) `{0}choose Suomi,RFB,K2`",
+      "JP": "BOTが項目中で1つを選択します。\nex) `{0}choose Suomi,RFB,K2`"
+    },
+    "avatar": {
+      "KR": "사용자의 디스코드 프로필 이미지를 보여줍니다.\nex) `{0}avatar` or `{0}avatar @someuser`",
+      "EN": "Shows a someone's discord profile image.\nex) `{0}avatar` or `{0}avatar @someuser`",
+      "JP": "使用者のdiscordプロフィールイメージを見せます。"
+    },
+    "stats": {
+      "KR": "초대코드, 개발자와 같은 봇 정보를 확인합니다.",
+      "EN": "Shows the information of BOT like invite link or developer.",
+      "JP": "招待コード、開発者と同じBOT情報を確認します。"
+    },
+    "weibo": {
+      "KR": "입력한 채널에 소녀전선 웨이보 뉴스 구독 기능을 설정합니다.",
+      "EN": "Toggle GF weibo news feed feature on the channel.",
+      "JP": "入力したチャンネルに少女前線weiboニュース購読機能を設定します。"
+    }
+  },
+  "doll": {
+    "time_error": {
+      "KR": "<@{0}>, 올바르지 않은 입력포맷입니다. `/doll 03:20`, `/doll 0320`, `/doll 320`과 같은 포맷으로 입력해주세요.",
+      "EN": "<@{0}>, Invalid input format. Enter message format like `/doll 03:20`, `/doll 0320`, `/doll 320`.",
+      "JP": "<@{0}>, 正しくない入力フォーマットです。 `/doll 03:20`, `/doll 0320`, `/doll 320`と同じフォーマットで入力してください。"
+    },
+    "not_found": {
+      "KR": "<@{0}>, 입력하신 제조시간에 해당하는 인형이 없습니다.",
+      "EN": "<@{0}>, There's no T-Dolls for the manufacturing time you've entered.",
+      "JP": "<@{0}>, 入力した製造時間に該当する人形がありません。"
+    }
+  },
+  "equip": {
+    "time_error": {
+      "KR": "<@{0}>, 올바르지 않은 입력포맷입니다. `/equip 00:55`, `/equip 0055`, `/equip 55`과 같은 포맷으로 입력해주세요.",
+      "EN": "<@{0}>, Invalid input format. Enter message format like `/equip 00:55`, `/equip 0055`, `/equip 55`.",
+      "JP": "<@{0}>, 正しくない入力フォーマットです。 `/equip 00:55`, `/equip 0055`, `/equip 55`と同じフォーマットで入力してください。"
+    },
+    "not_found": {
+      "KR": "<@{0}>, 입력하신 제조시간에 해당하는 인형이 없습니다.",
+      "EN": "<@{0}>, There's no equipments for the manufacturing time you've entered.",
+      "JP": "<@{0}>, 入力した製造時間に該当する装備がありません。"
+    },
+    "fairy": {
+      "KR": "요정",
+      "EN": "Fairy",
+      "JP": "妖精"
+    }
+  },
+  "paginate": {
+    "type": {
+      "KR": "종류",
+      "EN": "Type",
+      "JP": "種類"
+    },
+    "rarity": {
+      "KR": "희귀도",
+      "EN": "Rarity",
+      "JP": "レア度"
+    },
+    "time": {
+      "KR": "제조시간",
+      "EN": "Product Time",
+      "JP": "製造時間"
+    },
+    "name": {
+      "KR": "이름",
+      "EN": "Name",
+      "JP": "名前"
+    },
+    "stats": {
+      "KR": "능력치",
+      "EN": "Stats",
+      "JP": "能力値"
+    },
+    "skill": {
+      "KR": "스킬정보",
+      "EN": "Skill",
+      "JP": "スキルの情報"
+    },
+    "id": {
+      "KR": "도감번호",
+      "EN": "Doll ID",
+      "JP": "図鑑番号"
+    },
+    "buff": {
+      "KR": "진형버프",
+      "EN": "Buff",
+      "JP": "陣形バフ"
+    },
+    "artist": {
+      "KR": "일러스트레이터",
+      "EN": "Illustrator",
+      "JP": "絵師"
+    },
+    "cv": {
+      "KR": "성우",
+      "EN": "Voice Actor",
+      "JP": "声優"
+    },
+    "stars": {
+      "KR": "성",
+      "EN": " Stars",
+      "JP": "星"
+    }
+  },
+  "currency": {
+    "title": {
+      "KR": "환율정보",
+      "EN": "Currency Information",
+      "JP": "為替レート情報"
+    },
+    "value": {
+      "KR": "**USD** : {0}원\n**TWD** : {1}원\n**HKD** : {2}원",
+      "EN": "**USD** : ${0}\n**TWD** : ${1}\n**HKD** : ${2}",
+      "JP": "**USD** : {0}¥\n**TWD** : {1}¥\n**HKD** : {2}¥"
+    },
+    "date": {
+      "KR": "환율 데이터 갱신일 : ",
+      "EN": "Last Currency Information Update: ",
+      "JP": "為替レート データ 更新日: "
+    }
+  },
+  "exp": {
+    "result": {
+      "KR": "**{0}레벨 (현재 경험치 : {1})**에서 **{2}레벨**이 되기 위해서는 **{3}** ({4} exp) 개의 작전보고서가 필요합니다.",
+      "EN": "At **{0} level (current exp: {1})** to reach level **{2}**, you need **{3}** ({4} exp) reports.",
+      "JP": "**{0}レベル (現在経験値 : {1})**から **{2}レベル**になるには **{3}** ({4} exp) 個の作戦報告書が必要です。"
+    },
+    "error": {
+      "KR": "<@{0}>, 올바르지 않은 입력포맷입니다. `/exp 현재레벨 현재경험치 목표레벨`과 같은 포맷으로 입력해주세요.",
+      "EN": "<@{0}>, Invalid input format. Enter message format like `/exp current_lv current_exp target_lv`",
+      "JP": "<@{0}>, 正しくない入力フォーマットです。 `/exp 現在レベル 現在経験値 目標レベル`と同じフォーマットで入力してください。"
+    }
+  },
+  "winfo": {
+    "timeout": {
+      "KR": "<@{0}>, 시간초과! 다시 시도해주세요.",
+      "EN": "<@{0}>, Timeout! Please try again.",
+      "JP": "<@{0}>, 時間超過！もう一度試してください。"
+    },
+    "ask_platform": {
+      "KR": "{0}, **현재 플레이 중인 서버 번호를 입력해주세요**\n1: 비리비리\n2: 운영사\n3: 한국\n4: 대만\n5: 일본\n6: 취소",
+      "EN": "{0}, **Please enter the game platform number you are currently playing.**\n1: bilibili\n2: DigitalSky\n3: Korea\n4: Taiwan\n5: Japan\n6: Cancel",
+      "JP": "{0}, 現在プレイ中のサーバ番号を入力してください。\n1: ビリビリ\n2: 運営社\n3: 韓国\n4: 台湾\n5: 日本\n6: 取り消し"
+    },
+    "num_error": {
+      "KR": "<@{0}>, 번호를 잘못입력하셨습니다.",
+      "EN": "<@{0}>, You've entered wrong number.",
+      "JP": "<@{0}>, 番号が不正確です。"
+    },
+    "ask_server": {
+      "KR": "{0}, **현재 플레이 중인 서버 번호를 입력해주세요.**",
+      "EN": "{0}, **Please enter the server number you are currently playing.**",
+      "JP": "{0}, **現在プレイ中のサーバ番号を入力してください。**"
+    },
+    "ask_nick": {
+      "KR": "{0}, **인게임 닉네임을 입력해주세요.**",
+      "EN": "{0}, **Please enter the in-game nickname.**",
+      "JP": "{0}, **ゲーム内のニックネームを入力してください。**"
+    },
+    "ask_uid": {
+      "KR": "{0}, **친구코드(UID)를 입력해주세요.**",
+      "EN": "{0}, **Please enter the UID.**",
+      "JP": "{0}, **友達コード(UID)を入力してください。**"
+    },
+    "duplicated": {
+      "KR": "{0}, 이미 존재하는 데이터와 일치합니다.",
+      "EN": "{0}, Data already exists with same value!",
+      "JP": "{0}, 既に存在するデータと一致します。"
+    },
+    "ask_check": {
+      "KR": "{0}, **정보가 정확한지 확인해주세요**\n서버 : {0}\n닉네임 : {1}\n친구코드 : {2}\n\n위 정보를 저장하겠습니까?\n[Y/N]",
+      "EN": "{0}, **Check the information you've entered.**\nPlatform : {0}\nNickname : {1}\nUID : {2}\nSave the information above?\n[Y/N]",
+      "JP": "{0}, **情報が正確か確認してください。**\nサーバ : {0}ニックネーム : {1}\n友達コード : {2}\n\nこの情報をセーブしますか？\n[Y/N]"
+    }
+  },
+  "ulist": {
+    "timeout": {
+      "KR": "<@{0}>, 시간초과! 다시 시도해주세요.",
+      "EN": "<@{0}>, Timeout! Please try again.",
+      "JP": "<@{0}>, 時間超過！もう一度試してください。"
+    },
+    "ask_platform": {
+      "KR": "{0}, **서버 번호를 입력해주세요**\n1: 비리비리\n2: 운영사\n3: 한국\n4: 대만\n5: 일본\n6: 취소",
+      "EN": "{0}, **Please enter the game platform number.**\n1: bilibili\n2: DigitalSky\n3: Taiwan\n4: Korea\n5: Japan\n6: Cancel",
+      "JP": "{0}, **サーバ番号をを入力してください。**\n1: ビリビリ\n2: 運営社\n3: 韓国\n4: 台湾\n5: 日本\n6: 取り消し"
+    }
+  },
+  "stats": {
+    "developer": {
+      "KR": "개발자",
+      "EN": "Developer",
+      "JP": "開発者"
+    },
+    "developer_id": {
+      "KR": "개발자 ID",
+      "EN": "Developer ID",
+      "JP": "開発者ID"
+    },
+    "bot_id": {
+      "KR": "봇 ID",
+      "EN": "BOT ID",
+      "JP": "BOT ID"
+    },
+    "memory": {
+      "KR": "메모리",
+      "EN": "Memory",
+      "JP": "メモリ"
+    },
+    "presence": {
+      "KR": "접속현황",
+      "EN": "Presence",
+      "JP": "接続状況"
+    },
+    "presence_value": {
+      "KR": "{0} 서버\n{1} 텍스트 채널\n{2} 음성 채널",
+      "EN": "{0} Servers\n{1} Text Channels\n{2} Voice Channels",
+      "JP": "{0} サーバー\n{1} textチャンネル\n{2} voiceチャンネル"
+    },
+    "invite": {
+      "KR": "초대코드",
+      "EN": "Invite",
+      "JP": "招待コード"
+    }
+  },
+  "voicequiz": {
+    "question": {
+      "KR": "음성을 듣고 캐릭터를 맞춰주세요. (제한시간 10초)",
+      "EN": "Listen to voice and guess the character. (Time limit 10 seconds)",
+      "JP": "音声を聞いてからどんなキャラなのか当てて見てください。(制限時間10秒)"
+    },
+    "timeout": {
+      "KR": "시간초과!\n정답 : {0}\n점수 : {1}",
+      "EN": "Timeout!\nAnswer: {0}\nScore: {1}",
+      "JP": "タイム・オーバー！\n正解 : {0}\nポイント : {1}"
+    },
+    "answer": {
+      "KR": "정답입니다!\n점수 : {0}",
+      "EN": "Correct!\nScore: {0}",
+      "JP": "正解です！\nポイント : {0}"
+    },
+    "wrong": {
+      "KR": "틀렸습니다.\n정답 : {0}\n점수 : {1}",
+      "EN": "Wrong.\nAnswer: {0}\nScore: {1}",
+      "JP": "不正解です。\n正解 : {0}\nポイント : {1}"
+    },
+    "ask_save": {
+      "KR": "리더보드에 저장하시겠습니까?\n1. 예\n2. 아니오",
+      "EN": "Save to leaderboard?\n1. Yes\n2. No",
+      "JP": "リーダーボードにセーブしますか？\n1. はい\n2. いいえ"
+    },
+    "saved": {
+      "KR": "<@{0}>, 등록되었습니다.",
+      "EN": "<@{0}>, Saved.",
+      "JP": "<@{0}>, 登録しました。"
+    },
+    "end": {
+      "KR": "<@{0}>, 플레이 해주셔서 감사합니다.",
+      "EN": "<@{0}>, Thanks for playing.",
+      "JP": "<@{0}>, プレイして頂きありがとうございます。"
+    },
+    "not_in_voice": {
+      "KR": "<@{0}>, 음성채널에 입장한 상태에서만 보이스 퀴즈를 플레이 할 수 있습니다.",
+      "EN": "<@{0}>, You must connected to voice channel to play voice quiz.",
+      "JP": "<@{0}>, ボイスクイズは音声チャンネルに入場している時にプレイできます。音声チャンネルに入場してから再度試してください。"
+    },
+    "error": {
+      "KR": "<@{0}>, 오류가 발생했습니다.\n{1}",
+      "EN": "<@{0}>, Error occurred.\n{1}",
+      "JP": "<@{0}>, エラーが発生しました。\n{1}"
+    }
+  },
+  "leaderboard": {
+    "count": {
+      "KR": "{0} - {1}개\n",
+      "EN": "{0} - {1}PT\n",
+      "JP": "{0} - {1}個\n"
+    },
+    "title": {
+      "KR": "```\n보이스 퀴즈 TOP 10\n",
+      "EN": "```\nVoice Quiz TOP 10\n",
+      "JP": "```\nボイスクイズ TOP 10\n"
+    }
+  },
+  "error": {
+    "no_lang": {
+      "KR": "서버 관리자에게 \"{prefix}setlang\"을 사용하여 서버 언어를 설정하도록하십시오.",
+      "EN": "Please have your server administrator set the server language using \"{prefix}setlang\".",
+      "JP": "サーバー管理者に「{prefix}setlang」を使ってサーバー言語を設定してもらってください。"
+    },
+    "missing_perms": {
+      "KR": "이 명령어는 서버 관리자만 사용 할 수 있습니다.",
+      "EN": "This command is only available to server administrators.",
+      "JP": "このコマンドはサーバ管理者だけ使用可能です。"
+    },
+    "cmd_not_found": {
+      "KR": "이 명령은 존재하지 않습니다.",
+      "EN": "This command does not exist.",
+      "JP": "このコマンドは存在しません。"
+    }
+  }
+}
