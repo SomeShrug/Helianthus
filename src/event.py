@@ -1,5 +1,5 @@
 from discord import Game
-from discord.ext.commands import Bot, Cog, CommandNotFound, Context, MissingPermissions
+from discord.ext.commands import Bot, Cog, CommandError, CommandNotFound, Context, MissingPermissions
 
 from data import LANGMAN
 
