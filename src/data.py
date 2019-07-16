@@ -195,11 +195,11 @@ class DatabaseManager(object):
         return self._exp_data[level - 1]
 
     def level_from_exp(self, exp: int) -> Collection[int]:
+        if not 0 <= exp <= self._exp_data[-1]:
+            raise ValueError
         temp = tuple(takewhile(lambda x: exp >= x, self._exp_data))
         level = len(temp)
         leftover = exp - temp[-1]
-        if level == self.max_level and leftover:
-            raise ValueError
         return level, leftover
 
     def tdoll_from_time(self, time: str) -> List[TDoll]:
@@ -238,4 +238,4 @@ def setup(*args):
     del args
     LANGMAN.__class__ = LanguageManager
     DBMAN.__class__ = DatabaseManager
-    # print(f'Loaded {__file__}')
+    print(f'Loaded {__file__}')

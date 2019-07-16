@@ -1,7 +1,10 @@
-from discord import Game
-from discord.ext.commands import Bot, Cog, CommandError, CommandNotFound, Context, MissingPermissions
+from gettext import gettext
 
-from data import LANGMAN
+from discord import Game
+from discord.ext.commands import Bot, Cog, CommandError, CommandNotFound, Context, MissingPermissions, \
+    MissingRequiredArgument
+
+_ = gettext
 
 
 class Events(Cog):
@@ -20,11 +23,14 @@ class Events(Cog):
     @Cog.listener()
     async def on_command_error(self, ctx: Context, exception: CommandError):
         if type(exception) is MissingPermissions:
-            msg = await LANGMAN.get_string(ctx, 'error', 'missing_perms')
+            msg = _('You do not have the required permissions to run this command.')
         elif type(exception) is CommandNotFound:
-            msg = await LANGMAN.get_string(ctx, 'error', 'cmd_not_found')
+            msg = _('Please enter a registered command.')
+        elif type(exception) is MissingRequiredArgument:
+            exception: MissingRequiredArgument
+            msg = _(f'You are missing a required argument: `{exception.param.name}`')
         else:
-            return
+            msg = f'{type(exception)} {exception}'
         await ctx.send(msg.format(prefix=self.bot.command_prefix))
 
     @Cog.listener()

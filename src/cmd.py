@@ -7,9 +7,10 @@ from gettext import gettext
 from random import choice
 from typing import Collection, List, Optional, Union
 
-from discord import Embed, FFmpegPCMAudio, Member, Reaction, TextChannel, VoiceChannel, VoiceClient
+from discord import AppInfo, Embed, FFmpegPCMAudio, Member, Reaction, TextChannel, VoiceChannel, VoiceClient
 from discord.ext import commands
 from discord.ext.commands import Bot, Cog, Command, Context
+from math import ceil
 
 from data import _format_time, DBMAN, Equipment, LANGMAN, Language, TDoll
 
@@ -29,13 +30,13 @@ def sane_flag(s: str) -> str:
 
 
 def generate_help(prefix: str, command_pool: Collection[Command], chunk_size: int = 10):
-    cmd_gen = [command_pool[n:n + chunk_size] for n in range(0, len(command_pool), chunk_size)]
+    filtered_cmds = tuple(filter(lambda x: 'is_owner' not in ''.join(tuple(map(repr, x.checks))), command_pool))
+    cmd_gen = [filtered_cmds[n:n + chunk_size] for n in range(0, len(filtered_cmds), chunk_size)]
     embeds = []
     for page, pool in enumerate(cmd_gen, start=1):
         embed = Embed(color=SUCCESS_COLOR,
                       title=_('Helianthus v2.0'))
-
-        for command in filter(lambda x: 'is_owner' not in tuple(map(repr, x.checks)), pool):
+        for command in pool:
             if command.aliases:
                 name = f'`{prefix}[{"|".join((command.name, *command.aliases))}]`'
             else:
@@ -175,7 +176,7 @@ class Administration(commands.Cog):
     @commands.command(help=_('Get Helian\'s performance statistics'))
     async def stats(self, ctx: Context):
         lang = await LANGMAN.get_lang(ctx)
-        memory_usage = sum(sys.getsizeof(i) for i in gc.get_objects()) / 1000000
+        memory_usage = sum(map(sys.getsizeof, gc.get_objects())) / 1000000
         n_servers = len(self.bot.guilds)
         channels = self.bot.get_all_channels()
         counts = tuple(map(sum, zip(*[(type(chan) == VoiceChannel, type(chan) == TextChannel) for chan in channels])))
@@ -183,7 +184,11 @@ class Administration(commands.Cog):
         invite = f'https://discordapp.com/oauth2/authorize?client_id={self.bot.user.id}&scope=bot&permissions=66186303'
 
         embed = Embed(color=SUCCESS_COLOR, title=_('Helianthus v2.0'))
-        embed.add_field(name=_('Developer'), value=self.bot.get_user(self.bot.owner_id).display_name)
+        app_info: AppInfo = await self.bot.application_info()
+        if app_info.owner is None:
+            await self.bot.is_owner(ctx.author)
+        embed.add_field(name=_('Developer'),
+                        value=self.bot.get_user(self.bot.owner_id).display_name)
         embed.add_field(name=_('Developer ID'), value=self.bot.owner_id)
         embed.add_field(name=_('Helian\'s ID'), value=self.bot.user.id)
         embed.add_field(name=_('Memory Usage'), value=f'{memory_usage:.2f} MB')
@@ -250,16 +255,16 @@ class Analytics(Cog):
                 mod.set_field_at(6, name=_('Skills'), value=skill_str)
                 mod.set_image(url=doll.mod_image)
 
-            if add_footer and mod is not None:
+            if add_footer:
                 page_counter = page_template.format(page=page, max_pages=len(dolls))
-                if doll.mod_rarity:
+                if doll.mod_rarity and mod is not None:
                     footer = footer_template.format(page_counter=page_counter,
                                                     sub_counter=sub_template.format(page=1))
                     mod_footer = footer_template.format(page_counter=page_counter,
                                                         sub_counter=sub_template.format(page=2))
                     mod.set_footer(text=mod_footer)
                 else:
-                    footer = footer_template.format(page_counter=sub_template.format(page=1),
+                    footer = footer_template.format(page_counter=page_counter,
                                                     sub_counter='')
                 embed.set_footer(text=footer)
 
@@ -325,6 +330,7 @@ class Analytics(Cog):
     async def exp(self, ctx: Context, st_lvl: int, exp: int, ed_lvl: int, oath: Optional[sane_flag] = ''):
         oath = 'OATH' == oath
 
+        color = FAIL_COLOR
         if not 1 <= st_lvl <= DBMAN.max_level:
             msg = _('Please enter a valid starting level.')
         elif not 1 <= ed_lvl <= DBMAN.max_level:
@@ -333,29 +339,41 @@ class Analytics(Cog):
             msg = _('Please enter a target level greater than the current level.')
         else:
             start_exp = DBMAN.exp_from_level(st_lvl)
+            start_exp += exp
             try:
-                dlvl, dexp = DBMAN.level_from_exp(start_exp + exp)
+                actual_start, left_over = DBMAN.level_from_exp(start_exp)
+
             except ValueError:
                 msg = _('Please enter a valid amount of EXP.')
             else:
-                st_lvl += dlvl
-                start_exp += dexp
-                if ed_lvl > 100:
-                    target_exp = DBMAN.exp_from_level(100)
-                    mod_exp = DBMAN.exp_from_level(ed_lvl) - target_exp
+                if actual_start >= ed_lvl:
+                    msg = _('You do not need any combat reports.')
                 else:
-                    target_exp = DBMAN.exp_from_level(ed_lvl)
-                    mod_exp = 0
-                target_exp += mod_exp // (oath + 1)
-                reports = (target_exp - start_exp) // 3000 + 1
-                msg = _(f'You need {reports} combat reports')
-        await ctx.send(msg)
+                    color = SUCCESS_COLOR
+                    start_exp = DBMAN.exp_from_level(actual_start) + left_over
+                    if ed_lvl > 100:
+                        target_exp = DBMAN.exp_from_level(100)
+                        mod_exp = DBMAN.exp_from_level(ed_lvl) - target_exp
+                    else:
+                        target_exp = DBMAN.exp_from_level(ed_lvl)
+                        print(start_exp, target_exp)
+                        mod_exp = 0
+                    target_exp += mod_exp // (oath + 1)
+                    reports = ceil((target_exp - start_exp) / 3000)
+                    msg = _(
+                        f'At **level {actual_start}@({left_over} EXP)**, to reach **level {ed_lvl}** '
+                        f'you will need **{reports}** combat reports to cover {target_exp - start_exp} EXP.')
+        embed = Embed(color=color, description=msg)
+        await ctx.send(embed=embed)
 
-    @commands.command()
+    @commands.command(help='Have Helian lookup T-Doll information by name.')
     async def dinfo(self, ctx: Context, doll: str):
         dolls = DBMAN.tdoll_from_name(f'%{doll}%')
-        messages = await self._gen_doll_info_msgs(await LANGMAN.get_lang(ctx), *dolls)
-        await _paginate(self.bot, ctx, ctx.author, messages)
+        if dolls is None or not dolls:
+            await ctx.send(_('There are no T-Dolls under this alias.'))
+        else:
+            messages = await self._gen_doll_info_msgs(await LANGMAN.get_lang(ctx), *dolls)
+            await _paginate(self.bot, ctx, ctx.author, messages)
 
     @commands.command(aliases=['rand'],
                       help=_('Have Helian select a random T-Doll.'))
@@ -391,8 +409,8 @@ class Fun(Cog):
         else:
             await ctx.send(choice(content))
 
-    @commands.is_owner()
     @commands.command(help=_('Have Helian IDW someone.'))
+    @commands.is_owner()
     async def idw(self, ctx: Context, user: Optional[Member] = None):
         if user is None:
             v = ctx.author.voice
@@ -410,9 +428,9 @@ class Fun(Cog):
             vc.stop()
             await vc.disconnect()
 
-    @commands.is_owner()
     @commands.command(aliases=['s'],
                       help=_('Make Helian say something.'))
+    @commands.is_owner()
     async def say(self, ctx: Context, *, content: str):
         await ctx.message.delete()
         await ctx.send(content)
