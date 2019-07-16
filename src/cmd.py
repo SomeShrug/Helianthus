@@ -185,10 +185,7 @@ class Administration(commands.Cog):
 
         embed = Embed(color=SUCCESS_COLOR, title=_('Helianthus v2.0'))
         app_info: AppInfo = await self.bot.application_info()
-        if app_info.owner is None:
-            await self.bot.is_owner(ctx.author)
-        embed.add_field(name=_('Developer'),
-                        value=self.bot.get_user(self.bot.owner_id).display_name)
+        embed.add_field(name=_('Developer'), value=app_info.owner.display_name)
         embed.add_field(name=_('Developer ID'), value=self.bot.owner_id)
         embed.add_field(name=_('Helian\'s ID'), value=self.bot.user.id)
         embed.add_field(name=_('Memory Usage'), value=f'{memory_usage:.2f} MB')
