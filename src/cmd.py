@@ -12,10 +12,8 @@ from discord.ext import commands
 from discord.ext.commands import Bot, Cog, Command, Context
 from math import ceil
 
+from core import FAIL_COLOR, SUCCESS_COLOR
 from data import _format_time, DBMAN, Equipment, LANGMAN, Language, TDoll
-
-SUCCESS_COLOR = 0x00c853
-FAIL_COLOR = 0xd50000
 
 RIGHT = '\u27A1'
 LEFT = '\u2B05'
@@ -24,9 +22,20 @@ DOWN = '\u2B07'
 
 _ = gettext
 
+HELP_TEMPLATE = """```
+USAGE
+-----
+{usage}
 
-def sane_flag(s: str) -> str:
-    return s.upper()
+HELP
+----
+{help}
+
+PARAMETERS
+----------
+{params}
+```
+"""
 
 
 def generate_help(prefix: str, command_pool: Collection[Command], chunk_size: int = 10):
@@ -130,9 +139,18 @@ class Administration(commands.Cog):
         else:
             target_command: Optional[Command] = self.bot.get_command(command_query)
             if target_command is not None:
-                await ctx.send('poof')
+                if len(target_command.aliases) > 1:
+                    aliases = '|'.join(target_command.aliases)
+                    usage = f'[{target_command.name}{aliases}]'
+                else:
+                    usage = target_command.name
+                command_usage = f'{self.bot.command_prefix}{usage} {target_command.signature}'
+                argument_desc = '\n'.join(map(str, target_command.clean_params.values()))
+                await ctx.send(HELP_TEMPLATE.format(usage=command_usage,
+                                                    help=target_command.help,
+                                                    params=argument_desc))
             else:
-                await ctx.send('yay')
+                await ctx.send(_('That command does not exist.'))
 
     @commands.is_owner()
     @commands.command(aliases=['r'],
@@ -142,7 +160,7 @@ class Administration(commands.Cog):
         await LANGMAN.dump()
         self.bot.reload_extension('data')
         message = await ctx.send(_('Reloaded data managers.'))
-        self.bot.reload_extension('event')
+        self.bot.reload_extension('core')
         await message.edit(content=_('Reloaded event manager.'))
         self.bot.reload_extension('cmd')
         await message.edit(content=_('Reloaded commands.'))
@@ -308,13 +326,20 @@ class Analytics(Cog):
             await ctx.send(_('There are no T-Dolls with the selected production time.'))
 
     @commands.command(aliases=['e'],
-                      help=_('Have Helian lookup equipment from production times.'))
-    async def equip(self, ctx: Context, prod_time: str):
-        prod_time = await _format_time(prod_time)
-        if prod_time is None:
+                      help=_('''\
+                      Have Helian lookup equipment from production times.
+                      Pass in a time in the %H:%M or %H%M format, where %H is a optionally 
+                      0-padded two-digit hour and %M is an optionally 0-padded two digit 
+                      minute.
+                      
+                      Examples: 12:34, 1:2 (01:02), 12:3 (12:03), 12 (00:12), 123 (01:23)
+                      '''))
+    async def equip(self, ctx: Context, production_time: str):
+        production_time = await _format_time(production_time)
+        if production_time is None:
             await ctx.send(_('Please enter a valid production time.'))
             return
-        equipment = DBMAN.equip_from_time(prod_time)
+        equipment = DBMAN.equip_from_time(production_time)
         messages = await self._gen_equip_time_msgs(await LANGMAN.get_lang(ctx), *equipment)
         if len(equipment) > 1:
             await _paginate(self.bot, ctx, ctx.author, messages)
@@ -323,19 +348,24 @@ class Analytics(Cog):
         else:
             await ctx.send(_('There are no pieces of equipment with the selected production time.'))
 
-    @commands.command(help=_('Have Helian calculate the number of combat reports required for leveling T-Dolls.'))
-    async def exp(self, ctx: Context, st_lvl: int, exp: int, ed_lvl: int, oath: Optional[sane_flag] = ''):
-        oath = 'OATH' == oath
+    @commands.command(help=_('Have Helian calculate the number of combat reports required for leveling T-Dolls.\n'
+                             'Pass in \'yes\'/\'no\' or any amalgamation of those two for the "oath" parameter.'))
+    async def exp(self,
+                  ctx: Context,
+                  start_level: int,
+                  exp: int,
+                  target_level: int,
+                  oath: Optional[bool] = False):
 
         color = FAIL_COLOR
-        if not 1 <= st_lvl <= DBMAN.max_level:
+        if not 1 <= start_level <= DBMAN.max_level:
             msg = _('Please enter a valid starting level.')
-        elif not 1 <= ed_lvl <= DBMAN.max_level:
+        elif not 1 <= target_level <= DBMAN.max_level:
             msg = _('Please enter a valid target level.')
-        elif ed_lvl <= st_lvl:
+        elif target_level <= start_level:
             msg = _('Please enter a target level greater than the current level.')
         else:
-            start_exp = DBMAN.exp_from_level(st_lvl)
+            start_exp = DBMAN.exp_from_level(start_level)
             start_exp += exp
             try:
                 actual_start, left_over = DBMAN.level_from_exp(start_exp)
@@ -343,23 +373,21 @@ class Analytics(Cog):
             except ValueError:
                 msg = _('Please enter a valid amount of EXP.')
             else:
-                if actual_start >= ed_lvl:
+                if actual_start >= target_level:
                     msg = _('You do not need any combat reports.')
                 else:
                     color = SUCCESS_COLOR
                     start_exp = DBMAN.exp_from_level(actual_start) + left_over
-                    if ed_lvl > 100:
+                    if target_level > 100:
                         target_exp = DBMAN.exp_from_level(100)
-                        mod_exp = DBMAN.exp_from_level(ed_lvl) - target_exp
+                        mod_exp = DBMAN.exp_from_level(target_level) - target_exp
                     else:
-                        target_exp = DBMAN.exp_from_level(ed_lvl)
-                        print(start_exp, target_exp)
+                        target_exp = DBMAN.exp_from_level(target_level)
                         mod_exp = 0
                     target_exp += mod_exp // (oath + 1)
                     reports = ceil((target_exp - start_exp) / 3000)
-                    msg = _(
-                        f'At **level {actual_start}@({left_over} EXP)**, to reach **level {ed_lvl}** '
-                        f'you will need **{reports}** combat reports to cover {target_exp - start_exp} EXP.')
+                    msg = _(f'At **level {actual_start}@({left_over} EXP)**, to reach **level {target_level}** '
+                            f'you will need **{reports}** combat reports to cover {target_exp - start_exp} EXP.')
         embed = Embed(color=color, description=msg)
         await ctx.send(embed=embed)
 
@@ -406,8 +434,8 @@ class Fun(Cog):
         else:
             await ctx.send(choice(content))
 
-    @commands.command(help=_('Have Helian IDW someone.'))
     @commands.is_owner()
+    @commands.command(help=_('Have Helian IDW someone.'))
     async def idw(self, ctx: Context, user: Optional[Member] = None):
         if user is None:
             v = ctx.author.voice
@@ -419,15 +447,15 @@ class Fun(Cog):
         else:
             c: VoiceChannel = v.channel
             vc: VoiceClient = await c.connect()
-            vc.play(FFmpegPCMAudio('../assets/idw-3.mp3'))
+            vc.play(FFmpegPCMAudio('assets/sound/IDW_GAIN_JP.mp3'))
             while vc.is_playing():
                 await asyncio.sleep(1)
             vc.stop()
             await vc.disconnect()
 
+    @commands.is_owner()
     @commands.command(aliases=['s'],
                       help=_('Make Helian say something.'))
-    @commands.is_owner()
     async def say(self, ctx: Context, *, content: str):
         await ctx.message.delete()
         await ctx.send(content)

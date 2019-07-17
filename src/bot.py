@@ -6,9 +6,9 @@ PREFIX = '\\'
 TOKEN = os.environ['BOT_TOKEN']
 
 bot = commands.Bot(command_prefix=PREFIX, help_command=None)
-bot.load_extension('cmd')
 bot.load_extension('data')
-bot.load_extension('event')
+bot.load_extension('core')
+bot.load_extension('cmd')
 
 
 def main():
