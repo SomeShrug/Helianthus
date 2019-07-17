@@ -35,8 +35,6 @@ class Core(Cog):
             msg = _(f'You are missing a required argument: `{exception.param.name}`')
         elif type(exception) is BadArgument:
             msg = _(f'Please enter a valid argument.')
-        elif ctx.author.id == 343169042967953419:
-            msg = _('Stop trying.')
         else:
             msg = f'`{type(exception).__name__}: {exception}`'
         await ctx.send(msg.format(prefix=self.bot.command_prefix))
