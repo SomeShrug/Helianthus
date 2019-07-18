@@ -4,14 +4,16 @@ import platform
 _ = lambda x: x
 
 OS = platform.system()
-CONFIG_DIR_NAME = '.helian'
+CONFIG_DIR = '.helian'
 if OS == 'Windows':
-    CONFIG_PATH = os.environ['LOCALAPPDATA']
+    CONFIG_ROOT = os.environ['LOCALAPPDATA']
 elif OS in ('Linux', 'Darwin'):
-    CONFIG_PATH = os.environ['HOME']
+    CONFIG_ROOT = os.environ['HOME']
 else:
-    CONFIG_PATH = os.path.dirname(os.path.realpath(__file__))
-CONFIG_DIR = os.path.join(CONFIG_PATH, CONFIG_DIR_NAME)
+    CONFIG_ROOT = os.path.dirname(os.path.realpath(__file__))
+CONFIG_PATH = os.path.join(CONFIG_ROOT, CONFIG_DIR)
+CONFIG_FILE = 'settings.json'
+CONFIG_FILE_PATH = os.path.join(CONFIG_PATH, CONFIG_FILE)
 
 APP_DOMAIN = 'helian'
 

@@ -10,8 +10,8 @@ from typing import Collection, List, Optional
 from discord.ext.commands import Context
 
 # TODO: Axe all of this for GFDB :3
-from resources import APP_DOMAIN, DB_EQUIPMENT_TIME_QUERY, DB_TDOLL_NAME_QUERY, DB_TDOLL_RANDOM_QUERY, \
-    DB_TDOLL_TIME_QUERY
+from resources import APP_DOMAIN, CONFIG_FILE_PATH, DB_EQUIPMENT_TIME_QUERY, DB_TDOLL_NAME_QUERY, \
+    DB_TDOLL_RANDOM_QUERY, DB_TDOLL_TIME_QUERY
 
 TIME_REGEX = re.compile(r'''^(\d{1,2}:\d{1,2})$|^(\d{1,4})$''')
 
@@ -91,7 +91,7 @@ class SettingsManager(object):
         self._stbl = None
         self._strtbl = None
         self._languages = dict.fromkeys(Language.__members__.values())
-        with open('assets/lang.json', 'r+', encoding='utf8') as f:
+        with open(CONFIG_FILE_PATH, encoding='utf8') as f:
             self._stbl = json.load(f)
         gettext.install(APP_DOMAIN, 'locales')
         for language in Language.__members__.values():
@@ -100,8 +100,12 @@ class SettingsManager(object):
                                                             languages=[language.name.lower(), ])
 
     async def reload(self) -> None:
-        with open('assets/lang.json', 'r+', encoding='utf8') as f:
+        with open(CONFIG_FILE_PATH, encoding='utf8') as f:
             self._stbl = json.load(f)
+
+    async def dump(self):
+        with open(CONFIG_FILE_PATH, 'w', encoding='utf8') as f:
+            json.dump(self._stbl, f, indent=2, sort_keys=True)
 
     async def install_lang(self, ctx: Context):
         self._languages[await self.get_lang(ctx)].install()
@@ -149,10 +153,6 @@ class SettingsManager(object):
         except KeyError:
             raise KeyError
         await self.dump()
-
-    async def dump(self):
-        with open('assets/lang.json', 'w', encoding='utf8') as f:
-            json.dump(self._stbl, f, indent=2, sort_keys=True)
 
 
 class DatabaseManager(object):
