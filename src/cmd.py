@@ -13,7 +13,7 @@ from discord.ext.commands import Bot, Cog, Command, Context, ExtensionFailed
 from math import ceil
 
 from core import FAIL_COLOR, SUCCESS_COLOR
-from data import _format_time, DBMAN, Equipment, LANGMAN, Language, TDoll
+from data import _format_time, DBMAN, Equipment, Language, SETMAN, TDoll
 from resources import *
 from resources import EMOJI_DOWN, EMOJI_LEFT, EMOJI_RIGHT, EMOJI_UP
 
@@ -108,7 +108,7 @@ class Administration(commands.Cog):
     @commands.command(aliases=('dcl',), help=CMD_DELCHLANG_HELP_STR)
     async def delchlang(self, ctx: Context):
         try:
-            await LANGMAN.del_chlang(ctx)
+            await SETMAN.del_chlang(ctx)
         except KeyError:
             await ctx.send(_(CMD_DELCHLANG_LANG_UNASSIGNED_STR))
         else:
@@ -140,14 +140,14 @@ class Administration(commands.Cog):
     async def reload(self, ctx: Context):
         start_time = time.time()
         message = await ctx.send(_(CMD_RELOAD_BEGIN_STR))
-        await LANGMAN.dump()
+        await SETMAN.dump()
         for extension in self.bot.extensions.keys():
             try:
                 self.bot.reload_extension(extension)
             except ExtensionFailed:
                 continue
-        await LANGMAN.reload()
-        await LANGMAN.install_lang(ctx)
+        await SETMAN.reload()
+        await SETMAN.install_lang(ctx)
         seconds_elaped = time.time() - start_time
         await message.edit(content=_(CMD_RELOAD_COMPLETE_STR).format(time=seconds_elaped))
 
@@ -158,7 +158,7 @@ class Administration(commands.Cog):
             locales = ", ".join(map(lambda x: f"`{x.name}`", Language.__members__.values()))
             await ctx.send(_(CMD_SETLANG_UNKNOWN_LANGUAGE_STR).format(locales=locales))
         else:
-            await LANGMAN.set_slang(ctx, lang)
+            await SETMAN.set_slang(ctx, lang)
             await ctx.send(_(CMD_SETLANG_SUCCESS_STR).format(language=lang))
 
     @commands.has_permissions(administrator=True)
@@ -168,12 +168,12 @@ class Administration(commands.Cog):
             locales = ", ".join(map(lambda x: f"`{x.name}`", Language.__members__.values()))
             await ctx.send(_(CMD_SETCHLANG_UNKNOWN_LANGUAGE_STR).format(locales=locales))
         else:
-            await LANGMAN.set_chlang(ctx, lang)
+            await SETMAN.set_chlang(ctx, lang)
             await ctx.send(_(CMD_SETCHLANG_SUCCESS_STR).format(language=lang))
 
     @commands.command(help=_(CMD_STATS_HELP_STR))
     async def stats(self, ctx: Context):
-        lang = await LANGMAN.get_lang(ctx)
+        lang = await SETMAN.get_lang(ctx)
         memory_usage = sum(map(sys.getsizeof, gc.get_objects())) / 1000000
         n_servers = len(self.bot.guilds)
         channels = self.bot.get_all_channels()
@@ -322,7 +322,7 @@ class Analytics(Cog):
             await ctx.send(_(TIME_FORMAT_ERROR_STR))
             return
         dolls = DBMAN.tdoll_from_time(prod_time)
-        messages = await self._gen_doll_time_msgs(await LANGMAN.get_lang(ctx), *dolls)
+        messages = await self._gen_doll_time_msgs(await SETMAN.get_lang(ctx), *dolls)
 
         if len(dolls) > 1:
             await _paginate(self.bot, ctx, ctx.author, messages)
@@ -338,7 +338,7 @@ class Analytics(Cog):
             await ctx.send(_(TIME_FORMAT_ERROR_STR))
             return
         equipment = DBMAN.equip_from_time(production_time)
-        messages = await self._gen_equip_time_msgs(await LANGMAN.get_lang(ctx), *equipment)
+        messages = await self._gen_equip_time_msgs(await SETMAN.get_lang(ctx), *equipment)
         if len(equipment) > 1:
             await _paginate(self.bot, ctx, ctx.author, messages)
         elif equipment:
@@ -399,13 +399,13 @@ class Analytics(Cog):
         if dolls is None or not dolls:
             await ctx.send(_(CMD_DINFO_DOLL_NOT_FOUND_STR))
         else:
-            messages = await self._gen_doll_info_msgs(await LANGMAN.get_lang(ctx), *dolls)
+            messages = await self._gen_doll_info_msgs(await SETMAN.get_lang(ctx), *dolls)
             await _paginate(self.bot, ctx, ctx.author, messages)
 
     @commands.command(aliases=['rand'], help=_(CMD_RANDOM_HELP_STR))
     async def random(self, ctx: Context):
         doll = DBMAN.random_doll()
-        messages = await self._gen_doll_info_msgs(await LANGMAN.get_lang(ctx), doll)
+        messages = await self._gen_doll_info_msgs(await SETMAN.get_lang(ctx), doll)
         await _paginate(self.bot, ctx, ctx.author, messages)
 
 

@@ -5,7 +5,7 @@ from discord import Game
 from discord.ext.commands import BadArgument, Bot, Cog, CommandError, CommandNotFound, Context, MissingPermissions, \
     MissingRequiredArgument
 
-from data import LANGMAN
+from data import SETMAN
 from resources import *
 
 _ = lambda x: x
@@ -43,7 +43,7 @@ class Core(Cog):
     @Cog.listener()
     async def on_command(self, ctx: Context):
         await self.bot.wait_until_ready()
-        await LANGMAN.install_lang(ctx)
+        await SETMAN.install_lang(ctx)
 
 
 def setup(bot: Bot) -> None:

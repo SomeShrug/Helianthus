@@ -5,7 +5,7 @@ import json
 import re
 import sqlite3
 from itertools import takewhile
-from typing import Collection, Dict, List, Optional, Union
+from typing import Collection, List, Optional
 
 from discord.ext.commands import Context
 
@@ -86,55 +86,22 @@ DEFAULT_LANGUAGE = Language.EN
 
 
 # TODO: Use gettext instead of this
-class LanguageManager(object):
+class SettingsManager(object):
     def __init__(self):
         self._stbl = None
         self._strtbl = None
         self._languages = dict.fromkeys(Language.__members__.values())
         with open('assets/lang.json', 'r+', encoding='utf8') as f:
             self._stbl = json.load(f)
-        with open('assets/lang_strings.json', 'r+', encoding='utf8') as f:
-            self._strtbl = json.load(f)
         gettext.install(APP_DOMAIN, 'locales')
         for language in Language.__members__.values():
             self._languages[language] = gettext.translation(APP_DOMAIN,
                                                             localedir='locales',
                                                             languages=[language.name.lower(), ])
 
-    def __getitem__(self, item) -> Union[Dict, str]:
-        return self._strtbl[item]
-
-    async def is_lang_set(self, ctx: Context) -> bool:
-        return str(ctx.guild.id) in self._stbl
-
-    async def get_string(self, ctx: Context, *identifiers: str) -> Optional[str]:
-        lang = await self.get_lang(ctx)
-        layer = self._strtbl
-        for identifier in identifiers:
-            if identifier not in layer:
-                return None
-            layer = layer[identifier]
-        return layer.get(lang.name, '\n'.join(layer.values()))
-
     async def reload(self) -> None:
         with open('assets/lang.json', 'r+', encoding='utf8') as f:
             self._stbl = json.load(f)
-        with open('assets/lang_strings.json', 'r+', encoding='utf8') as f:
-            self._strtbl = json.load(f)
-
-    async def get_slang(self, ctx: Context) -> Language:
-        if not await self.is_lang_set(ctx):
-            raise LookupError
-        return Language[self._stbl[str(ctx.guild.id)]['lang']]
-
-    async def get_clang(self, ctx: Context) -> Language:
-        if not await self.is_lang_set(ctx):
-            raise LookupError
-        try:
-            return self._stbl[str(ctx.guild.id)]['channels'][
-                str(ctx.channel.id)]
-        except KeyError:
-            return Language[self._stbl[str(ctx.guild.id)]['lang']]
 
     async def install_lang(self, ctx: Context):
         self._languages[await self.get_lang(ctx)].install()
@@ -239,12 +206,12 @@ class DatabaseManager(object):
         self._db.close()
 
 
-LANGMAN = LanguageManager()
+SETMAN = SettingsManager()
 DBMAN = DatabaseManager()
 
 
 def setup(*args):
     del args
-    LANGMAN.__class__ = LanguageManager
+    SETMAN.__class__ = SettingsManager
     DBMAN.__class__ = DatabaseManager
     print(f'Loaded {__file__}')
