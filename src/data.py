@@ -1,5 +1,6 @@
 import dataclasses
 import enum
+import gettext
 import json
 import re
 import sqlite3
@@ -8,18 +9,13 @@ from typing import Collection, Dict, List, Optional, Union
 
 from discord.ext.commands import Context
 
-# TODO: Axe all of this for GFDB
-
-TDOLL_TIME_QUERY = 'SELECT * FROM doll_info WHERE time=?'
-TDOLL_NAME_QUERY = 'SELECT * FROM doll_info WHERE alias LIKE ?'
-EQUIPMENT_TIME_QUERY = 'SELECT * FROM equip_info WHERE time=?'
-TDOLL_RANDOM_QUERY = """\
-SELECT * FROM doll_info
-ORDER BY RANDOM()
-LIMIT 1
-"""
+# TODO: Axe all of this for GFDB :3
+from resources import APP_DOMAIN, DB_EQUIPMENT_TIME_QUERY, DB_TDOLL_NAME_QUERY, DB_TDOLL_RANDOM_QUERY, \
+    DB_TDOLL_TIME_QUERY
 
 TIME_REGEX = re.compile(r'''^(\d{1,2}:\d{1,2})$|^(\d{1,4})$''')
+
+_ = lambda x: x
 
 
 async def _format_time(s: str) -> Optional[str]:
@@ -80,7 +76,7 @@ class TDoll(object):
 class Equipment(object):
     time: str = ''
     name: str = ''
-    rarity: str = ''
+    rarity: int = 0
     type: str = ''
     stats: str = ''
     image: str = ''
@@ -94,10 +90,18 @@ DEFAULT_LANGUAGE = Language.EN
 # TODO: Use gettext instead of this
 class LanguageManager(object):
     def __init__(self):
+        self._stbl = None
+        self._strtbl = None
+        self._languages = dict.fromkeys(Language.__members__.values())
         with open('assets/lang.json', 'r+', encoding='utf8') as f:
             self._stbl = json.load(f)
         with open('assets/lang_strings.json', 'r+', encoding='utf8') as f:
             self._strtbl = json.load(f)
+        gettext.install(APP_DOMAIN, 'locales')
+        for language in Language.__members__.values():
+            self._languages[language] = gettext.translation(APP_DOMAIN,
+                                                            localedir='locales',
+                                                            languages=[language.name.lower(), ])
 
     def __getitem__(self, item) -> Union[Dict, str]:
         return self._strtbl[item]
@@ -134,6 +138,9 @@ class LanguageManager(object):
         except KeyError:
             return Language[self._stbl[str(ctx.guild.id)]['lang']]
 
+    async def install_lang(self, ctx: Context):
+        self._languages[await self.get_lang(ctx)].install()
+
     async def get_lang(self, ctx: Context) -> Language:
         s_id = str(ctx.guild.id)
         c_id = str(ctx.channel.id)
@@ -157,6 +164,7 @@ class LanguageManager(object):
         s_id = str(ctx.guild.id)
         self._stbl.setdefault(s_id, {})
         self._stbl[s_id]['lang'] = lang
+        await self.dump()
 
     async def set_chlang(self, ctx: Context, lang: str) -> None:
         lang = lang.upper()
@@ -167,12 +175,15 @@ class LanguageManager(object):
         self._stbl.setdefault(s_id, {'lang': lang})
         self._stbl[s_id].setdefault('channels', {})
         self._stbl[s_id]['channels'][c_id] = lang
+        await self.dump()
 
     async def del_chlang(self, ctx: Context) -> None:
         try:
+            print(self._stbl[str(ctx.guild.id)]['channels'][str(ctx.channel.id)])
             del self._stbl[str(ctx.guild.id)]['channels'][str(ctx.channel.id)]
         except KeyError:
-            raise
+            raise KeyError
+        await self.dump()
 
     async def dump(self):
         with open('assets/lang.json', 'w', encoding='utf8') as f:
@@ -203,25 +214,25 @@ class DatabaseManager(object):
         return level, leftover
 
     def tdoll_from_time(self, time: str) -> List[TDoll]:
-        self._c.execute(TDOLL_TIME_QUERY, (time,))
+        self._c.execute(DB_TDOLL_TIME_QUERY, (time,))
         data = self._c.fetchall()
         dolls = [TDoll(*row) for row in data]
         return dolls
 
     def tdoll_from_name(self, name: str) -> List[TDoll]:
-        self._c.execute(TDOLL_NAME_QUERY, (name,))
+        self._c.execute(DB_TDOLL_NAME_QUERY, (name,))
         data = self._c.fetchall()
         dolls = [TDoll(*row) for row in data]
         return dolls
 
     def equip_from_time(self, time: str) -> List[Equipment]:
-        self._c.execute(EQUIPMENT_TIME_QUERY, (time,))
+        self._c.execute(DB_EQUIPMENT_TIME_QUERY, (time,))
         data = self._c.fetchall()
         equipment = [Equipment(*row) for row in data]
         return equipment
 
     def random_doll(self) -> TDoll:
-        self._c.execute(TDOLL_RANDOM_QUERY)
+        self._c.execute(DB_TDOLL_RANDOM_QUERY)
         data = self._c.fetchone()
         return TDoll(*data)
 

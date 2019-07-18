@@ -1,12 +1,14 @@
 import time
 from datetime import datetime
-from gettext import gettext
 
-from discord import Embed, Game
+from discord import Game
 from discord.ext.commands import BadArgument, Bot, Cog, CommandError, CommandNotFound, Context, MissingPermissions, \
     MissingRequiredArgument
 
-_ = gettext
+from data import LANGMAN
+from resources import *
+
+_ = lambda x: x
 
 
 class Core(Cog):
@@ -20,12 +22,10 @@ class Core(Cog):
         print(f'BOT ID : {self.bot.user.id}')
         print(f'Total Server(s) : {len(self.bot.guilds)}')
         print(f'Total Channel(s) : {len(tuple(self.bot.get_all_channels()))}')
-        await self.bot.change_presence(
-            activity=Game(name=f'{self.bot.command_prefix}help for commands. Why won\'t you change?'))
+        await self.bot.change_presence(activity=Game(name=HELIAN_PRESENCE.format(prefix=self.bot.command_prefix)))
 
     @Cog.listener()
     async def on_command_error(self, ctx: Context, exception: CommandError):
-        embed = Embed()
         if type(exception) is MissingPermissions:
             msg = _('You do not have the required permissions to run this command.')
         elif type(exception) is CommandNotFound:
@@ -41,7 +41,8 @@ class Core(Cog):
 
     @Cog.listener()
     async def on_command(self, ctx: Context):
-        pass
+        await self.bot.wait_until_ready()
+        await LANGMAN.install_lang(ctx)
 
 
 def setup(bot: Bot) -> None:

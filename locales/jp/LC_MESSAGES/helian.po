@@ -1,0 +1,372 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2019-07-17 21:26-0500\n"
+"PO-Revision-Date: 2019-07-17 21:27-0500\n"
+"Last-Translator: ¯\\_(ツ)_/¯\n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 2.2.3\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-Basepath: ../../../src\n"
+"X-Poedit-SearchPath-0: resources.py\n"
+
+#: resources.py:9
+msgid "Helianthus"
+msgstr "へリアンサス"
+
+#: resources.py:11
+#, python-brace-format
+msgid "Type {prefix}help for a list of commands."
+msgstr "コマンドのリストを見るには「{prefix}help」と入力してください。"
+
+#: resources.py:19
+msgid "You do not have the requisite permissions to run this command."
+msgstr "このコマンドを実行するために必要な権限がありません。"
+
+#: resources.py:20
+msgid "Please enter a valid command."
+msgstr "有効なコマンドを入力してください。"
+
+#: resources.py:21
+#, python-brace-format
+msgid "You are missing a required argument `{parameter}`"
+msgstr "このパラメータはありません：`{parameter}`"
+
+#: resources.py:22
+msgid "Please enter an argument with a correct type."
+msgstr "正しい種類の引数を入力してください。"
+
+#: resources.py:30
+msgid "Please enter a time in a correct format (%H:%M or %H%M)"
+msgstr "正しい形式で時間を入力してください。"
+
+#: resources.py:32
+msgid "Name"
+msgstr "名前"
+
+#: resources.py:33
+msgid "Type"
+msgstr "型"
+
+#: resources.py:34
+msgid "Production Time"
+msgstr "生産時間"
+
+#: resources.py:35
+msgid "Rarity"
+msgstr "希少性"
+
+#: resources.py:36
+msgid "ID"
+msgstr "ID"
+
+#: resources.py:37
+msgid "Tile Coverage"
+msgstr "タイルバフ"
+
+#: resources.py:39
+msgid "Skill"
+msgstr "スキル"
+
+#: resources.py:40
+msgid "Skills"
+msgstr "スキル"
+
+#: resources.py:41
+msgid "Artist"
+msgstr "画家"
+
+#: resources.py:42
+msgid "CV"
+msgstr "声優"
+
+#: resources.py:44
+msgid "Stats"
+msgstr "スタッツ"
+
+#: resources.py:46
+msgid "Developer"
+msgstr "開発元"
+
+#: resources.py:47
+msgid "Developer ID"
+msgstr "開発元のID"
+
+#: resources.py:48
+msgid "Helian's ID"
+msgstr "へリアンのID"
+
+#: resources.py:49
+msgid "Memory Usage"
+msgstr "メモリ使用量"
+
+#: resources.py:50
+#, python-brace-format
+msgid "{memory:.2f} MB"
+msgstr "{memory:.2f} MB"
+
+#: resources.py:51
+msgid "Presence"
+msgstr "へリアンの存在"
+
+#: resources.py:52
+#, python-brace-format
+msgid ""
+"Servers: {n_servers}\n"
+"Text Channels: {n_text}\n"
+"Voice Channels: {n_voice}"
+msgstr ""
+"サーバー：{n_servers}\n"
+"テキストチャンネル：{n_text}\n"
+"ボイスチャンネル：{n_voice}"
+
+#: resources.py:53
+msgid "Server Language"
+msgstr "サーバーの言語"
+
+#: resources.py:54
+msgid "Invite"
+msgstr "招待"
+
+#: resources.py:57
+msgid "Have Helian get you some help."
+msgstr "へリアンに助けを求めてください。"
+
+#: resources.py:58
+msgid "That command does not exist."
+msgstr "このコマンドが存在しません。"
+
+#: resources.py:59
+#, python-brace-format
+msgid ""
+"```\n"
+"USAGE\n"
+"-----\n"
+"{usage}\n"
+"\n"
+"HELP\n"
+"----\n"
+"{help}\n"
+"\n"
+"PARAMETERS\n"
+"----------\n"
+"{params}```"
+msgstr ""
+"```\n"
+"使用方法\n"
+"ーーーー\n"
+"{usage}\n"
+"\n"
+"ヘルプテキスト\n"
+"ーーーーーーー\n"
+"{help}\n"
+"\n"
+"パラメータ\n"
+"ーーーーー\n"
+"{params}```"
+
+#: resources.py:61
+#, python-brace-format
+msgid "Page {current} of {max}"
+msgstr "{current}／{max}ページ"
+
+#: resources.py:62
+#, python-brace-format
+msgid "Subpage {current} of {max}"
+msgstr "{current}／{max}サブページ"
+
+#: resources.py:65
+msgid "Have Helian reload her databases."
+msgstr "データベースを再ロードするようにへリアンに依頼してください。"
+
+#: resources.py:66
+msgid "Beginning reload..."
+msgstr "リロードを開始..."
+
+#: resources.py:67
+#, python-brace-format
+msgid "Reloaded extension {extension}."
+msgstr "リロードされた符号拡張：{extension}。"
+
+#: resources.py:68
+msgid "Dumped server settings."
+msgstr "ダンプされたサーバー設定。"
+
+#: resources.py:69
+#, python-brace-format
+msgid "Reload complete. Elapsed time: {time:.2f} seconds."
+msgstr "リロードが完了しました。 経過時間：{time:.2f}秒。"
+
+#: resources.py:71
+msgid "Have Helian set your server's global language."
+msgstr "サーバー言語を設定するようにへリアンに依頼してください。"
+
+#: resources.py:72
+#, python-brace-format
+msgid ""
+"You have entered an unsupported or unknown language. Only following locales "
+"are supported: {locales}"
+msgstr ""
+"サポートされていない、または不明な言語を入力しました。\n"
+"以下のロケールがサポートされています：{locales}"
+
+#: resources.py:74
+#, python-brace-format
+msgid "This server's language has been set to: {language}."
+msgstr "このサーバーの言語は「{language}」に設定されています。"
+
+#: resources.py:76
+msgid "Have Helian set a channel's language."
+msgstr "チャネル言語を設定するようにへリアンに依頼してください。"
+
+#: resources.py:78
+#, python-brace-format
+msgid "This channel's language has been set to: {language}"
+msgstr "このチャンネルの言語は「{language}」に設定されています。"
+
+#: resources.py:80
+msgid "Have Helian unset a channel's language."
+msgstr "チャネル言語を削除するようにへリアンに依頼してください。"
+
+#: resources.py:81
+msgid "This channel does not have an assigned language."
+msgstr "このチャンネルに割り当てられている言語はありません。"
+
+#: resources.py:82
+msgid "This channel's language has been successfully deleted."
+msgstr "このチャンネルの言語は削除されました。"
+
+#: resources.py:84
+msgid "Have Helian IDW someone."
+msgstr "へリアンにIDWの誰かに依頼してください。"
+
+#: resources.py:85
+msgid "Please mention a member currently in voice."
+msgstr "音声チャンネルの誰かに述べてください。"
+
+#: resources.py:87
+msgid "Have Helian choose something for you."
+msgstr "何かを選択するようにへリアンに依頼してください。"
+
+#: resources.py:88
+msgid "Please supply a whitespace-separated list."
+msgstr "有効なリストを入力してください。"
+
+#: resources.py:90
+msgid "Have Helian retrieve a user's avatar."
+msgstr "ユーザーのアバターを取得するようにへリアンに依頼してください。"
+
+#: resources.py:92
+msgid "Have Helian say something."
+msgstr "ヘリアンに何か言うように言う。"
+
+#: resources.py:94
+msgid "Have Helian select a random T-Doll for you."
+msgstr "ランダムな人形を選ぶようにへリアンに依頼してください。"
+
+#: resources.py:96
+msgid "Have Helian lookup T-Doll information by name."
+msgstr "人形を探すようにへリアンに依頼してください。"
+
+#: resources.py:97
+msgid "There are no T-Dolls under this alias."
+msgstr "この名前の人形はありません。"
+
+#: resources.py:99
+msgid ""
+"Have Helian calculate the number of combat reports required for leveling T-"
+"Dolls.\n"
+"\n"
+"Pass in \"yes\" or \"no\" or any amalgamation or abbreviation of those two "
+"for the \"oath\" parameter."
+msgstr ""
+"人形に与えるための戦闘報告の数を計算するようにへリアンに依頼してください。\n"
+"\n"
+"「oath」パラメータの代わりに「yes」または「no」と入力します。"
+
+#: resources.py:101
+msgid "Please enter a valid starting level between 1 and 120."
+msgstr "1～120の有効な開始レベルを入力してください。"
+
+#: resources.py:102
+msgid "Please enter a valid target level between 1 and 120."
+msgstr "1～120の有効な目標レベルを入力してください。"
+
+#: resources.py:103
+#, python-brace-format
+msgid "Please enter a target level greater than {level}."
+msgstr "{level}より大きい目標レベルを入力してください。"
+
+#: resources.py:104
+msgid "You do not need any combat reports."
+msgstr "戦闘報告は必要ありません。"
+
+#: resources.py:105
+msgid "Please enter a valid amount of EXP."
+msgstr "有効金額のEXPを入力してください。"
+
+#: resources.py:106
+#, python-brace-format
+msgid ""
+"At **level {start}@({exp} EXP)**, to reach **level {target}** you will need "
+"**{reports}** combat reports to cover {exp_difference} EXP."
+msgstr ""
+"**{exp} EXP**で**レベル {start}**から**レベル {target}**に達するには、"
+"**{exp_difference} EXP**をカバーするために**{reports}の戦闘報告書**が必要にな"
+"ります。"
+
+#: resources.py:109
+msgid ""
+"Have Helian retrieve equipment with the given production time.\n"
+"\n"
+"Enter a time in either the %H:%M or %H%M format, where %H is an optionally 0-"
+"padded two-digit hour and %M is an optionally 0-padded two-digit minute.\n"
+"\n"
+"Examples: 12:34, 1:2 (01:02), 12:3 (12:03), 12 (00:12), 123 (01:23)"
+msgstr ""
+"に基づいて人形を検索するようにへリアンに依頼してください。\n"
+"\n"
+"これらの形式で時間を入力してください。「%H:%M」または「%H%M」\n"
+"「%H」は２桁の時です。「%M」は２桁の分です。\n"
+"\n"
+"例：12:34, 1:2 (01:02), 12:3 (12:03), 12 (00:12), 123 (01:23)"
+
+#: resources.py:113
+msgid "There are no pieces of equipment with the selected production time."
+msgstr "選択された製造時間の設備はありません。"
+
+#: resources.py:116
+msgid ""
+"Have Helian retrieve T-Dolls with the given production time.\n"
+"\n"
+"Enter a time in either the %H:%M or %H%M format, where %H is an optionally 0-"
+"padded two-digit hour and %M is an optionally 0-padded two digit minute.\n"
+"\n"
+"Examples: 12:34, 1:2 (01:02), 12:3 (12:03), 12 (00:12), 123 (01:23)"
+msgstr ""
+"に基づいて人形を検索するようにへリアンに依頼してください。\n"
+"\n"
+"これらの形式で時間を入力してください。「%H:%M」または「%H%M」\n"
+"「%H」は２桁の時です。「%M」は２桁の分です。\n"
+"\n"
+"例：12:34, 1:2 (01:02), 12:3 (12:03), 12 (00:12), 123 (01:23)"
+
+#: resources.py:120
+msgid "There are no T-Dolls with the selected production time."
+msgstr "選択した生産時間の人形はありません。"
+
+#: resources.py:123
+msgid "Get Helian's performance statistics."
+msgstr "パフォーマンス統計についてへリアンに依頼してください。"
+
+#~ msgid "Helianthus {version}"
+#~ msgstr "へリアンサス　{version}"

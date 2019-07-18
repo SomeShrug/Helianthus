@@ -1,0 +1,437 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Helianthus\n"
+"POT-Creation-Date: 2019-07-17 21:28-0500\n"
+"PO-Revision-Date: 2019-07-17 21:29-0500\n"
+"Last-Translator: ¯\\_(ツ)_/¯\n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 2.2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: ../../../src\n"
+"X-Poedit-SearchPath-0: resources.py\n"
+
+#: resources.py:9
+msgid "Helianthus"
+msgstr "Helianthus"
+
+#: resources.py:11
+#, python-brace-format
+msgid "Type {prefix}help for a list of commands."
+msgstr "Type {prefix}help for a list of commands."
+
+#: resources.py:19
+msgid "You do not have the requisite permissions to run this command."
+msgstr "You do not have the requisite permissions to run this command."
+
+#: resources.py:20
+msgid "Please enter a valid command."
+msgstr "Please enter a valid command."
+
+#: resources.py:21
+#, python-brace-format
+msgid "You are missing a required argument `{parameter}`"
+msgstr "You are missing a required argument `{parameter}`"
+
+#: resources.py:22
+msgid "Please enter an argument with a correct type."
+msgstr "Please enter an argument with a correct type."
+
+#: resources.py:30
+msgid "Please enter a time in a correct format (%H:%M or %H%M)"
+msgstr "Please enter a time in a correct format (%H:%M or %H%M)"
+
+#: resources.py:32
+msgid "Name"
+msgstr "Name"
+
+#: resources.py:33
+msgid "Type"
+msgstr "Type"
+
+#: resources.py:34
+msgid "Production Time"
+msgstr "Production Time"
+
+#: resources.py:35
+msgid "Rarity"
+msgstr "Rarity"
+
+#: resources.py:36
+msgid "ID"
+msgstr "ID"
+
+#: resources.py:37
+msgid "Tile Coverage"
+msgstr "Tile Coverage"
+
+#: resources.py:39
+msgid "Skill"
+msgstr "Skill"
+
+#: resources.py:40
+msgid "Skills"
+msgstr "Skills"
+
+#: resources.py:41
+msgid "Artist"
+msgstr "Artist"
+
+#: resources.py:42
+msgid "CV"
+msgstr "CV"
+
+#: resources.py:44
+msgid "Stats"
+msgstr "Stats"
+
+#: resources.py:46
+msgid "Developer"
+msgstr "Developer"
+
+#: resources.py:47
+msgid "Developer ID"
+msgstr "Developer ID"
+
+#: resources.py:48
+msgid "Helian's ID"
+msgstr "Helian's ID"
+
+#: resources.py:49
+msgid "Memory Usage"
+msgstr "Memory Usage"
+
+#: resources.py:50
+#, python-brace-format
+msgid "{memory:.2f} MB"
+msgstr "{memory:.2f} MB"
+
+#: resources.py:51
+msgid "Presence"
+msgstr "Presence"
+
+#: resources.py:52
+#, python-brace-format
+#| msgid ""
+#| "Servers: {servers}\n"
+#| "Text Channels: {text}\n"
+#| "Voice Channels: {voice}\n"
+msgid ""
+"Servers: {n_servers}\n"
+"Text Channels: {n_text}\n"
+"Voice Channels: {n_voice}"
+msgstr ""
+"Servers: {n_servers}\n"
+"Text Channels: {n_text}\n"
+"Voice Channels: {n_voice}"
+
+#: resources.py:53
+msgid "Server Language"
+msgstr "Server Language"
+
+#: resources.py:54
+msgid "Invite"
+msgstr "Invite"
+
+#: resources.py:57
+msgid "Have Helian get you some help."
+msgstr "Have Helian get you some help."
+
+#: resources.py:58
+msgid "That command does not exist."
+msgstr "That command does not exist."
+
+#: resources.py:59
+#, python-brace-format
+#| msgid ""
+#| "```\n"
+#| "USAGE\n"
+#| "-----\n"
+#| "{usage}\n"
+#| "\n"
+#| "HELP\n"
+#| "----\n"
+#| "{help}\n"
+#| "\n"
+#| "PARAMETERS\n"
+#| "----------\n"
+#| "{params}\n"
+#| "```\n"
+msgid ""
+"```\n"
+"USAGE\n"
+"-----\n"
+"{usage}\n"
+"\n"
+"HELP\n"
+"----\n"
+"{help}\n"
+"\n"
+"PARAMETERS\n"
+"----------\n"
+"{params}```"
+msgstr ""
+"```\n"
+"USAGE\n"
+"-----\n"
+"{usage}\n"
+"\n"
+"HELP\n"
+"----\n"
+"{help}\n"
+"\n"
+"PARAMETERS\n"
+"----------\n"
+"{params}```"
+
+#: resources.py:61
+#, python-brace-format
+msgid "Page {current} of {max}"
+msgstr "Page {current} of {max}"
+
+#: resources.py:62
+#, python-brace-format
+msgid "Subpage {current} of {max}"
+msgstr "Subpage {current} of {max}"
+
+#: resources.py:65
+msgid "Have Helian reload her databases."
+msgstr "Have Helian reload her databases."
+
+#: resources.py:66
+msgid "Beginning reload..."
+msgstr "Beginning reload..."
+
+#: resources.py:67
+#, python-brace-format
+#| msgid "Reloaded extension {ext}."
+msgid "Reloaded extension {extension}."
+msgstr "Reloaded extension {extension}."
+
+#: resources.py:68
+msgid "Dumped server settings."
+msgstr "Dumped server settings."
+
+#: resources.py:69
+#, python-brace-format
+#| msgid "Reload complete. Elapsed time: {:.2f} seconds"
+msgid "Reload complete. Elapsed time: {time:.2f} seconds."
+msgstr "Reload complete. Elapsed time: {time:.2f} seconds."
+
+#: resources.py:71
+msgid "Have Helian set your server's global language."
+msgstr "Have Helian set your server's global language."
+
+#: resources.py:72
+#, python-brace-format
+#| msgid ""
+#| "You have entered an unsupported or unknown language.\n"
+#| "The following locales are supported: {locales}\n"
+msgid ""
+"You have entered an unsupported or unknown language. Only following locales "
+"are supported: {locales}"
+msgstr ""
+"You have entered an unsupported or unknown language. Only following locales "
+"are supported: {locales}"
+
+#: resources.py:74
+#, python-brace-format
+#| msgid "This server's language has been set to: {lang}"
+msgid "This server's language has been set to: {language}."
+msgstr "This server's language has been set to: {language}."
+
+#: resources.py:76
+#| msgid "Have Helian set a channel's language"
+msgid "Have Helian set a channel's language."
+msgstr "Have Helian set a channel's language."
+
+#: resources.py:78
+#, python-brace-format
+#| msgid "This channel's language has been set to: {lang}"
+msgid "This channel's language has been set to: {language}"
+msgstr "This channel's language has been set to: {language}"
+
+#: resources.py:80
+msgid "Have Helian unset a channel's language."
+msgstr "Have Helian unset a channel's language."
+
+#: resources.py:81
+msgid "This channel does not have an assigned language."
+msgstr "This channel does not have an assigned language."
+
+#: resources.py:82
+msgid "This channel's language has been successfully deleted."
+msgstr "This channel's language has been successfully deleted."
+
+#: resources.py:84
+msgid "Have Helian IDW someone."
+msgstr "Have Helian IDW someone."
+
+#: resources.py:85
+msgid "Please mention a member currently in voice."
+msgstr "Please mention a member currently in voice."
+
+#: resources.py:87
+msgid "Have Helian choose something for you."
+msgstr "Have Helian choose something for you."
+
+#: resources.py:88
+msgid "Please supply a whitespace-separated list."
+msgstr "Please supply a whitespace-separated list."
+
+#: resources.py:90
+msgid "Have Helian retrieve a user's avatar."
+msgstr "Have Helian retrieve a user's avatar."
+
+#: resources.py:92
+msgid "Have Helian say something."
+msgstr "Have Helian say something."
+
+#: resources.py:94
+msgid "Have Helian select a random T-Doll for you."
+msgstr "Have Helian select a random T-Doll for you."
+
+#: resources.py:96
+msgid "Have Helian lookup T-Doll information by name."
+msgstr "Have Helian lookup T-Doll information by name."
+
+#: resources.py:97
+msgid "There are no T-Dolls under this alias."
+msgstr "There are no T-Dolls under this alias."
+
+#: resources.py:99
+#| msgid ""
+#| "Have Helian calculate the number of combat reports required for leveling "
+#| "T-Dolls.\n"
+#| "\n"
+#| "Pass in \"yes\" or \"no\" or any amalgamation or abbreviation of those "
+#| "two for the \"oath\" parameter.\n"
+msgid ""
+"Have Helian calculate the number of combat reports required for leveling T-"
+"Dolls.\n"
+"\n"
+"Pass in \"yes\" or \"no\" or any amalgamation or abbreviation of those two "
+"for the \"oath\" parameter."
+msgstr ""
+"Have Helian calculate the number of combat reports required for leveling T-"
+"Dolls.\n"
+"\n"
+"Pass in \"yes\" or \"no\" or any amalgamation or abbreviation of those two "
+"for the \"oath\" parameter."
+
+#: resources.py:101
+#| msgid "Please enter a valid starting level [1,120]."
+msgid "Please enter a valid starting level between 1 and 120."
+msgstr "Please enter a valid starting level between 1 and 120."
+
+#: resources.py:102
+#| msgid "Please enter a valid target level [1,120]."
+msgid "Please enter a valid target level between 1 and 120."
+msgstr "Please enter a valid target level between 1 and 120."
+
+#: resources.py:103
+#, python-brace-format
+#| msgid "Please enter a target level greater than the current level."
+msgid "Please enter a target level greater than {level}."
+msgstr "Please enter a target level greater than {level}."
+
+#: resources.py:104
+msgid "You do not need any combat reports."
+msgstr "You do not need any combat reports."
+
+#: resources.py:105
+msgid "Please enter a valid amount of EXP."
+msgstr "Please enter a valid amount of EXP."
+
+#: resources.py:106
+#, python-brace-format
+msgid ""
+"At **level {start}@({exp} EXP)**, to reach **level {target}** you will need "
+"**{reports}** combat reports to cover {exp_difference} EXP."
+msgstr ""
+"At **level {start}@({exp} EXP)**, to reach **level {target}** you will need "
+"**{reports}** combat reports to cover {exp_difference} EXP."
+
+#: resources.py:109
+#| msgid ""
+#| "Have Helian lookup T-Dolls from production times.\n"
+#| "\n"
+#| "Pass in a time in the %H:%M or %H%M format, where %H is a optionally \n"
+#| "0-padded two-digit hour and %M is an optionally 0-padded two digit \n"
+#| "minute.\n"
+#| "\n"
+#| "Examples: 12:34, 1:2 (01:02), 12:3 (12:03), 12 (00:12), 123 (01:23)\n"
+msgid ""
+"Have Helian retrieve equipment with the given production time.\n"
+"\n"
+"Enter a time in either the %H:%M or %H%M format, where %H is an optionally 0-"
+"padded two-digit hour and %M is an optionally 0-padded two-digit minute.\n"
+"\n"
+"Examples: 12:34, 1:2 (01:02), 12:3 (12:03), 12 (00:12), 123 (01:23)"
+msgstr ""
+"Have Helian retrieve equipment with the given production time.\n"
+"\n"
+"Enter a time in either the %H:%M or %H%M format, where %H is an optionally 0-"
+"padded two-digit hour and %M is an optionally 0-padded two-digit minute.\n"
+"\n"
+"Examples: 12:34, 1:2 (01:02), 12:3 (12:03), 12 (00:12), 123 (01:23)"
+
+#: resources.py:113
+msgid "There are no pieces of equipment with the selected production time."
+msgstr "There are no pieces of equipment with the selected production time."
+
+#: resources.py:116
+msgid ""
+"Have Helian retrieve T-Dolls with the given production time.\n"
+"\n"
+"Enter a time in either the %H:%M or %H%M format, where %H is an optionally 0-"
+"padded two-digit hour and %M is an optionally 0-padded two digit minute.\n"
+"\n"
+"Examples: 12:34, 1:2 (01:02), 12:3 (12:03), 12 (00:12), 123 (01:23)"
+msgstr ""
+"Have Helian retrieve T-Dolls with the given production time.\n"
+"\n"
+"Enter a time in either the %H:%M or %H%M format, where %H is an optionally 0-"
+"padded two-digit hour and %M is an optionally 0-padded two digit minute.\n"
+"\n"
+"Examples: 12:34, 1:2 (01:02), 12:3 (12:03), 12 (00:12), 123 (01:23)"
+
+#: resources.py:120
+msgid "There are no T-Dolls with the selected production time."
+msgstr "There are no T-Dolls with the selected production time."
+
+#: resources.py:123
+#| msgid "Get Helian's performance statistics"
+msgid "Get Helian's performance statistics."
+msgstr "Get Helian's performance statistics."
+
+#, fuzzy
+#~| msgid "You do not have the requisite permissions to run this command."
+#~ msgid "You do not have the required permissions to run this command."
+#~ msgstr "You do not have the requisite permissions to run this command."
+
+#, fuzzy
+#~| msgid "Please enter a valid command."
+#~ msgid "Please enter a registered command."
+#~ msgstr "Please enter a valid command."
+
+#, fuzzy
+#~| msgid "You are missing a required argument `{parameter}`"
+#~ msgid "You are missing a required argument: `{exception.param.name}`"
+#~ msgstr "You are missing a required argument `{parameter}`"
+
+#, fuzzy
+#~| msgid "Please enter a valid command."
+#~ msgid "Please enter a valid argument."
+#~ msgstr "Please enter a valid command."
+
+#~ msgid "Helianthus {version}"
+#~ msgstr "Helianthus {version}"
