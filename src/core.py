@@ -9,6 +9,7 @@ from data import LANGMAN
 from resources import *
 
 _ = lambda x: x
+del _
 
 
 class Core(Cog):

@@ -15,8 +15,6 @@ from resources import APP_DOMAIN, DB_EQUIPMENT_TIME_QUERY, DB_TDOLL_NAME_QUERY, 
 
 TIME_REGEX = re.compile(r'''^(\d{1,2}:\d{1,2})$|^(\d{1,4})$''')
 
-_ = lambda x: x
-
 
 async def _format_time(s: str) -> Optional[str]:
     m = TIME_REGEX.search(s)

@@ -18,6 +18,7 @@ from resources import *
 from resources import EMOJI_DOWN, EMOJI_LEFT, EMOJI_RIGHT, EMOJI_UP
 
 _ = lambda x: x
+del _
 
 
 def generate_help(prefix: str, command_pool: Collection[Command], chunk_size: int = 10):
@@ -146,7 +147,6 @@ class Administration(commands.Cog):
             except ExtensionFailed:
                 continue
         await LANGMAN.reload()
-        await LANGMAN.reload_lang()
         await LANGMAN.install_lang(ctx)
         seconds_elaped = time.time() - start_time
         await message.edit(content=_(CMD_RELOAD_COMPLETE_STR).format(time=seconds_elaped))
