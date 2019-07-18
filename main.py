@@ -1,11 +1,11 @@
 import os
 import sys
+from os import path
 
 if __name__ == '__main__':
-    path = os.path.dirname(os.path.realpath(__file__))
-    sys.path.insert(0, path)
-    sys.path.insert(1, os.path.join(path, 'src'))
-    sys.path.insert(2, os.path.join(path, 'locales'))
+    cwd = path.dirname(path.realpath(path.expanduser(__file__)))
+    os.chdir(cwd)
+    sys.path.insert(0, path.join(cwd, 'src'))
     import bot
 
     bot.main()
