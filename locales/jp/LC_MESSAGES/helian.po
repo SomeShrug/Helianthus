@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2019-07-17 21:26-0500\n"
-"PO-Revision-Date: 2019-07-17 21:27-0500\n"
+"POT-Creation-Date: 2019-08-01 21:02-0500\n"
+"PO-Revision-Date: 2019-08-01 21:02-0500\n"
 "Last-Translator: ¯\\_(ツ)_/¯\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -19,106 +19,106 @@ msgstr ""
 "X-Poedit-Basepath: ../../../src\n"
 "X-Poedit-SearchPath-0: resources.py\n"
 
-#: resources.py:9
+#: resources.py:24
 msgid "Helianthus"
 msgstr "へリアンサス"
 
-#: resources.py:11
+#: resources.py:26
 #, python-brace-format
 msgid "Type {prefix}help for a list of commands."
 msgstr "コマンドのリストを見るには「{prefix}help」と入力してください。"
 
-#: resources.py:19
+#: resources.py:34
 msgid "You do not have the requisite permissions to run this command."
 msgstr "このコマンドを実行するために必要な権限がありません。"
 
-#: resources.py:20
+#: resources.py:35
 msgid "Please enter a valid command."
 msgstr "有効なコマンドを入力してください。"
 
-#: resources.py:21
+#: resources.py:36
 #, python-brace-format
 msgid "You are missing a required argument `{parameter}`"
 msgstr "このパラメータはありません：`{parameter}`"
 
-#: resources.py:22
+#: resources.py:37
 msgid "Please enter an argument with a correct type."
 msgstr "正しい種類の引数を入力してください。"
 
-#: resources.py:30
+#: resources.py:46
 msgid "Please enter a time in a correct format (%H:%M or %H%M)"
 msgstr "正しい形式で時間を入力してください。"
 
-#: resources.py:32
+#: resources.py:48
 msgid "Name"
 msgstr "名前"
 
-#: resources.py:33
+#: resources.py:49
 msgid "Type"
 msgstr "型"
 
-#: resources.py:34
+#: resources.py:50
 msgid "Production Time"
 msgstr "生産時間"
 
-#: resources.py:35
+#: resources.py:51
 msgid "Rarity"
 msgstr "希少性"
 
-#: resources.py:36
+#: resources.py:52
 msgid "ID"
 msgstr "ID"
 
-#: resources.py:37
+#: resources.py:53
 msgid "Tile Coverage"
 msgstr "タイルバフ"
 
-#: resources.py:39
+#: resources.py:55
 msgid "Skill"
 msgstr "スキル"
 
-#: resources.py:40
+#: resources.py:56
 msgid "Skills"
 msgstr "スキル"
 
-#: resources.py:41
+#: resources.py:57
 msgid "Artist"
 msgstr "画家"
 
-#: resources.py:42
+#: resources.py:58
 msgid "CV"
 msgstr "声優"
 
-#: resources.py:44
+#: resources.py:60
 msgid "Stats"
 msgstr "スタッツ"
 
-#: resources.py:46
+#: resources.py:62
 msgid "Developer"
 msgstr "開発元"
 
-#: resources.py:47
+#: resources.py:63
 msgid "Developer ID"
 msgstr "開発元のID"
 
-#: resources.py:48
+#: resources.py:64
 msgid "Helian's ID"
 msgstr "へリアンのID"
 
-#: resources.py:49
+#: resources.py:65
 msgid "Memory Usage"
 msgstr "メモリ使用量"
 
-#: resources.py:50
+#: resources.py:66
 #, python-brace-format
 msgid "{memory:.2f} MB"
 msgstr "{memory:.2f} MB"
 
-#: resources.py:51
+#: resources.py:67
 msgid "Presence"
 msgstr "へリアンの存在"
 
-#: resources.py:52
+#: resources.py:68
 #, python-brace-format
 msgid ""
 "Servers: {n_servers}\n"
@@ -129,23 +129,23 @@ msgstr ""
 "テキストチャンネル：{n_text}\n"
 "ボイスチャンネル：{n_voice}"
 
-#: resources.py:53
+#: resources.py:69
 msgid "Server Language"
 msgstr "サーバーの言語"
 
-#: resources.py:54
+#: resources.py:70
 msgid "Invite"
 msgstr "招待"
 
-#: resources.py:57
+#: resources.py:73
 msgid "Have Helian get you some help."
 msgstr "へリアンに助けを求めてください。"
 
-#: resources.py:58
+#: resources.py:74
 msgid "That command does not exist."
 msgstr "このコマンドが存在しません。"
 
-#: resources.py:59
+#: resources.py:75
 #, python-brace-format
 msgid ""
 "```\n"
@@ -174,43 +174,48 @@ msgstr ""
 "ーーーーー\n"
 "{params}```"
 
-#: resources.py:61
+#: resources.py:76
+#, python-brace-format
+msgid "Command category: {category}"
+msgstr ""
+
+#: resources.py:78
 #, python-brace-format
 msgid "Page {current} of {max}"
 msgstr "{current}／{max}ページ"
 
-#: resources.py:62
+#: resources.py:79
 #, python-brace-format
 msgid "Subpage {current} of {max}"
 msgstr "{current}／{max}サブページ"
 
-#: resources.py:65
+#: resources.py:82
 msgid "Have Helian reload her databases."
 msgstr "データベースを再ロードするようにへリアンに依頼してください。"
 
-#: resources.py:66
+#: resources.py:83
 msgid "Beginning reload..."
 msgstr "リロードを開始..."
 
-#: resources.py:67
+#: resources.py:84
 #, python-brace-format
 msgid "Reloaded extension {extension}."
 msgstr "リロードされた符号拡張：{extension}。"
 
-#: resources.py:68
+#: resources.py:85
 msgid "Dumped server settings."
 msgstr "ダンプされたサーバー設定。"
 
-#: resources.py:69
+#: resources.py:86
 #, python-brace-format
 msgid "Reload complete. Elapsed time: {time:.2f} seconds."
 msgstr "リロードが完了しました。 経過時間：{time:.2f}秒。"
 
-#: resources.py:71
+#: resources.py:88
 msgid "Have Helian set your server's global language."
 msgstr "サーバー言語を設定するようにへリアンに依頼してください。"
 
-#: resources.py:72
+#: resources.py:89
 #, python-brace-format
 msgid ""
 "You have entered an unsupported or unknown language. Only following locales "
@@ -219,69 +224,75 @@ msgstr ""
 "サポートされていない、または不明な言語を入力しました。\n"
 "以下のロケールがサポートされています：{locales}"
 
-#: resources.py:74
-#, python-brace-format
-msgid "This server's language has been set to: {language}."
+#: resources.py:91
+#, fuzzy, python-brace-format
+#| msgid "This server's language has been set to: {language}."
+msgid "This server's language has been set to: `{language}`."
 msgstr "このサーバーの言語は「{language}」に設定されています。"
 
-#: resources.py:76
+#: resources.py:93
 msgid "Have Helian set a channel's language."
 msgstr "チャネル言語を設定するようにへリアンに依頼してください。"
 
-#: resources.py:78
-#, python-brace-format
-msgid "This channel's language has been set to: {language}"
+#: resources.py:95
+#, fuzzy, python-brace-format
+#| msgid "This channel's language has been set to: {language}"
+msgid "This channel's language has been set to: `{language}`."
 msgstr "このチャンネルの言語は「{language}」に設定されています。"
 
-#: resources.py:80
+#: resources.py:97
 msgid "Have Helian unset a channel's language."
 msgstr "チャネル言語を削除するようにへリアンに依頼してください。"
 
-#: resources.py:81
+#: resources.py:98
 msgid "This channel does not have an assigned language."
 msgstr "このチャンネルに割り当てられている言語はありません。"
 
-#: resources.py:82
+#: resources.py:99
 msgid "This channel's language has been successfully deleted."
 msgstr "このチャンネルの言語は削除されました。"
 
-#: resources.py:84
+#: resources.py:101
 msgid "Have Helian IDW someone."
 msgstr "へリアンにIDWの誰かに依頼してください。"
 
-#: resources.py:85
+#: resources.py:102
 msgid "Please mention a member currently in voice."
 msgstr "音声チャンネルの誰かに述べてください。"
 
-#: resources.py:87
+#: resources.py:104
 msgid "Have Helian choose something for you."
 msgstr "何かを選択するようにへリアンに依頼してください。"
 
-#: resources.py:88
+#: resources.py:105
 msgid "Please supply a whitespace-separated list."
 msgstr "有効なリストを入力してください。"
 
-#: resources.py:90
+#: resources.py:107
 msgid "Have Helian retrieve a user's avatar."
 msgstr "ユーザーのアバターを取得するようにへリアンに依頼してください。"
 
-#: resources.py:92
+#: resources.py:109
 msgid "Have Helian say something."
 msgstr "ヘリアンに何か言うように言う。"
 
-#: resources.py:94
+#: resources.py:111
 msgid "Have Helian select a random T-Doll for you."
 msgstr "ランダムな人形を選ぶようにへリアンに依頼してください。"
 
-#: resources.py:96
-msgid "Have Helian lookup T-Doll information by name."
+#: resources.py:113
+#, fuzzy
+#| msgid "Have Helian lookup T-Doll information by name."
+msgid "Have Helian lookup entity information by name."
 msgstr "人形を探すようにへリアンに依頼してください。"
 
-#: resources.py:97
-msgid "There are no T-Dolls under this alias."
+#: resources.py:114
+#, fuzzy
+#| msgid "There are no T-Dolls under this alias."
+msgid "There are no entities under this alias."
 msgstr "この名前の人形はありません。"
 
-#: resources.py:99
+#: resources.py:116
 msgid ""
 "Have Helian calculate the number of combat reports required for leveling T-"
 "Dolls.\n"
@@ -293,28 +304,28 @@ msgstr ""
 "\n"
 "「oath」パラメータの代わりに「yes」または「no」と入力します。"
 
-#: resources.py:101
+#: resources.py:118
 msgid "Please enter a valid starting level between 1 and 120."
 msgstr "1～120の有効な開始レベルを入力してください。"
 
-#: resources.py:102
+#: resources.py:119
 msgid "Please enter a valid target level between 1 and 120."
 msgstr "1～120の有効な目標レベルを入力してください。"
 
-#: resources.py:103
+#: resources.py:120
 #, python-brace-format
 msgid "Please enter a target level greater than {level}."
 msgstr "{level}より大きい目標レベルを入力してください。"
 
-#: resources.py:104
+#: resources.py:121
 msgid "You do not need any combat reports."
 msgstr "戦闘報告は必要ありません。"
 
-#: resources.py:105
+#: resources.py:122
 msgid "Please enter a valid amount of EXP."
 msgstr "有効金額のEXPを入力してください。"
 
-#: resources.py:106
+#: resources.py:123
 #, python-brace-format
 msgid ""
 "At **level {start}@({exp} EXP)**, to reach **level {target}** you will need "
@@ -324,7 +335,7 @@ msgstr ""
 "**{exp_difference} EXP**をカバーするために**{reports}の戦闘報告書**が必要にな"
 "ります。"
 
-#: resources.py:109
+#: resources.py:126
 msgid ""
 "Have Helian retrieve equipment with the given production time.\n"
 "\n"
@@ -340,11 +351,11 @@ msgstr ""
 "\n"
 "例：12:34, 1:2 (01:02), 12:3 (12:03), 12 (00:12), 123 (01:23)"
 
-#: resources.py:113
+#: resources.py:130
 msgid "There are no pieces of equipment with the selected production time."
 msgstr "選択された製造時間の設備はありません。"
 
-#: resources.py:116
+#: resources.py:133
 msgid ""
 "Have Helian retrieve T-Dolls with the given production time.\n"
 "\n"
@@ -360,11 +371,11 @@ msgstr ""
 "\n"
 "例：12:34, 1:2 (01:02), 12:3 (12:03), 12 (00:12), 123 (01:23)"
 
-#: resources.py:120
+#: resources.py:137
 msgid "There are no T-Dolls with the selected production time."
 msgstr "選択した生産時間の人形はありません。"
 
-#: resources.py:123
+#: resources.py:140
 msgid "Get Helian's performance statistics."
 msgstr "パフォーマンス統計についてへリアンに依頼してください。"
 

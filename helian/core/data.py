@@ -1,31 +1,18 @@
 import dataclasses
 import enum
 import gettext
+import itertools
 import json
 import re
 import sqlite3
-from itertools import takewhile
 from typing import Collection, List, Optional
 
-from discord.ext.commands import Context
+from discord.ext import commands
 
 # TODO: Axe all of this for GFDB :3
-from resources import APP_DOMAIN, CONFIG_FILE_PATH, DB_EQUIPMENT_TIME_QUERY, DB_TDOLL_NAME_QUERY, \
-    DB_TDOLL_RANDOM_QUERY, DB_TDOLL_TIME_QUERY
+from core.resource import *
 
 TIME_REGEX = re.compile(r'''^(\d{1,2}:\d{1,2})$|^(\d{1,4})$''')
-
-
-async def _format_time(s: str) -> Optional[str]:
-    m = TIME_REGEX.search(s)
-    if m is None:
-        return None
-    csep, nosep = m.group(1, 2)
-    if csep is not None:
-        return ':'.join(map(lambda i: i.zfill(2), csep.split(':')))
-    else:
-        temp = nosep.zfill(4)
-        return ':'.join((temp[:2], temp[2:]))
 
 
 class Language(enum.Enum):
@@ -69,17 +56,39 @@ class TDoll(object):
     mod_rarity: int = 0
     mod_tile: str = ''
 
+    @property
+    def has_mod(self):
+        return self.mod_rarity != 0
+
+    @property
+    def image_url(self):
+        url = f'https://raw.githubusercontent.com/36base/girlsfrontline-resources/master/pic/' \
+            f'pic_{eval(self.name)[0].lower().replace(" ", "_")}.png'
+        print(url)
+        return url
+
+    @property
+    def mod_image_url(self):
+        url = f'https://raw.githubusercontent.com/36base/girlsfrontline-resources/master/pic/' \
+            f'pic_{eval(self.name)[0].lower().replace(" ", "_")}mod.png'
+        print(url)
+        return url
+
 
 @dataclasses.dataclass()
 class Equipment(object):
     time: str = ''
     name: str = ''
-    rarity: int = 0
+    rarity: Optional[int] = 0
     type: str = ''
     stats: str = ''
     image: str = ''
     slname: str = ''
     sldesc: str = ''
+
+    @property
+    def is_fairy(self):
+        return self.rarity is None
 
 
 DEFAULT_LANGUAGE = Language.EN
@@ -107,10 +116,10 @@ class SettingsManager(object):
         with open(CONFIG_FILE_PATH, 'w', encoding='utf8') as f:
             json.dump(self._stbl, f, indent=2, sort_keys=True)
 
-    async def install_lang(self, ctx: Context):
+    async def install_lang(self, ctx: commands.Context):
         self._languages[await self.get_lang(ctx)].install()
 
-    async def get_lang(self, ctx: Context) -> Language:
+    async def get_lang(self, ctx: commands.Context) -> Language:
         s_id = str(ctx.guild.id)
         c_id = str(ctx.channel.id)
         if s_id in self._stbl:
@@ -126,7 +135,7 @@ class SettingsManager(object):
         else:
             return DEFAULT_LANGUAGE
 
-    async def set_slang(self, ctx: Context, lang: str) -> None:
+    async def set_slang(self, ctx: commands.Context, lang: str) -> None:
         lang = lang.upper()
         if lang not in Language.__members__:
             raise ValueError('Invalid language')
@@ -135,7 +144,7 @@ class SettingsManager(object):
         self._stbl[s_id]['lang'] = lang
         await self.dump()
 
-    async def set_chlang(self, ctx: Context, lang: str) -> None:
+    async def set_chlang(self, ctx: commands.Context, lang: str) -> None:
         lang = lang.upper()
         if lang not in Language.__members__:
             raise ValueError('Invalid language')
@@ -146,9 +155,8 @@ class SettingsManager(object):
         self._stbl[s_id]['channels'][c_id] = lang
         await self.dump()
 
-    async def del_chlang(self, ctx: Context) -> None:
+    async def del_chlang(self, ctx: commands.Context) -> None:
         try:
-            print(self._stbl[str(ctx.guild.id)]['channels'][str(ctx.channel.id)])
             del self._stbl[str(ctx.guild.id)]['channels'][str(ctx.channel.id)]
         except KeyError:
             raise KeyError
@@ -173,7 +181,7 @@ class DatabaseManager(object):
     def level_from_exp(self, exp: int) -> Collection[int]:
         if not 0 <= exp <= self._exp_data[-1]:
             raise ValueError
-        temp = tuple(takewhile(lambda x: exp >= x, self._exp_data))
+        temp = tuple(itertools.takewhile(lambda x: exp >= x, self._exp_data))
         level = len(temp)
         leftover = exp - temp[-1]
         return level, leftover
@@ -196,6 +204,12 @@ class DatabaseManager(object):
         equipment = [Equipment(*row) for row in data]
         return equipment
 
+    def equip_from_name(self, name: str) -> List[Equipment]:
+        self._c.execute(DB_EQUIPMENT_NAME_QUERY, (name,))
+        data = self._c.fetchall()
+        equipment = [Equipment(*row) for row in data]
+        return equipment
+
     def random_doll(self) -> TDoll:
         self._c.execute(DB_TDOLL_RANDOM_QUERY)
         data = self._c.fetchone()
@@ -206,12 +220,9 @@ class DatabaseManager(object):
         self._db.close()
 
 
+def test():
+    print('hi')
+
+
 SETMAN = SettingsManager()
 DBMAN = DatabaseManager()
-
-
-def setup(*args):
-    del args
-    SETMAN.__class__ = SettingsManager
-    DBMAN.__class__ = DatabaseManager
-    print(f'Loaded {__file__}')

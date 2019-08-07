@@ -36,11 +36,12 @@ CORE_COMMAND_NOT_FOUND_STR = _('Please enter a valid command.')
 CORE_MISSING_REQUIRED_ARGUMENT_STR = _('You are missing a required argument `{parameter}`')
 CORE_BAD_ARGUMENT_STR = _('Please enter an argument with a correct type.')
 
-DB_TDOLL_ALIAS_STR = '%{alias}%'
+DB_ALIAS_STR = '%{alias}%'
 DB_TDOLL_TIME_QUERY = 'SELECT * FROM doll_info WHERE time=?'
-DB_TDOLL_NAME_QUERY = 'SELECT * FROM doll_info WHERE alias LIKE ?'
+DB_TDOLL_NAME_QUERY = 'SELECT * FROM doll_info WHERE name LIKE ?'
 DB_TDOLL_RANDOM_QUERY = 'SELECT * FROM doll_info\nORDER BY RANDOM()\nLIMIT 1'
 DB_EQUIPMENT_TIME_QUERY = 'SELECT * FROM equip_info WHERE time=?'
+DB_EQUIPMENT_NAME_QUERY = 'SELECT * FROM equip_info WHERE name LIKE ?'
 
 TIME_FORMAT_ERROR_STR = _('Please enter a time in a correct format (%H:%M or %H%M)')
 
@@ -72,10 +73,11 @@ STATS_INVITE_URL_STR = 'https://discordapp.com/oauth2/authorize?client_id={id}&s
 CMD_HELP_HELP_STR = _('Have Helian get you some help.')
 CMD_HELP_COMMAND_NOT_FOUND_STR = _('That command does not exist.')
 CMD_HELP_COMMAND_STR = _('```\nUSAGE\n-----\n{usage}\n\nHELP\n----\n{help}\n\nPARAMETERS\n----------\n{params}```')
+CMD_HELP_CATEGORY_STR = _('Command category: {category}')
 
-PAGINATOR_PAGE_COUNTER_STR = _('Page {current} of {max}')
-PAGINATOR_SUBPAGE_COUNTER_STR = _('Subpage {current} of {max}')
-PAGINATOR_FOOTER_STR = '{page} {sub_page}'
+INFO_PAGE_COUNTER_STR = _('Page {current} of {max}')
+INFO_SUBPAGE_COUNTER_STR = _('Subpage {current} of {max}')
+INFO_FOOTER_STR = '{page} {sub_page}'
 
 CMD_RELOAD_HELP_STR = _('Have Helian reload her databases.')
 CMD_RELOAD_BEGIN_STR = _('Beginning reload...')
@@ -86,11 +88,11 @@ CMD_RELOAD_COMPLETE_STR = _('Reload complete. Elapsed time: {time:.2f} seconds.'
 CMD_SETLANG_HELP_STR = _('Have Helian set your server\'s global language.')
 CMD_SETLANG_UNKNOWN_LANGUAGE_STR = _('You have entered an unsupported or unknown language. Only following locales are '
                                      'supported: {locales}')
-CMD_SETLANG_SUCCESS_STR = _('This server\'s language has been set to: {language}.')
+CMD_SETLANG_SUCCESS_STR = _('This server\'s language has been set to: `{language}`.')
 
 CMD_SETCHLANG_HELP_STR = _('Have Helian set a channel\'s language.')
 CMD_SETCHLANG_UNKNOWN_LANGUAGE_STR = CMD_SETLANG_UNKNOWN_LANGUAGE_STR
-CMD_SETCHLANG_SUCCESS_STR = _('This channel\'s language has been set to: {language}')
+CMD_SETCHLANG_SUCCESS_STR = _('This channel\'s language has been set to: `{language}`.')
 
 CMD_DELCHLANG_HELP_STR = _('Have Helian unset a channel\'s language.')
 CMD_DELCHLANG_LANG_UNASSIGNED_STR = _('This channel does not have an assigned language.')
@@ -108,8 +110,10 @@ CMD_SAY_HELP_STR = _('Have Helian say something.')
 
 CMD_RANDOM_HELP_STR = _('Have Helian select a random T-Doll for you.')
 
-CMD_DINFO_HELP_STR = _('Have Helian lookup T-Doll information by name.')
-CMD_DINFO_DOLL_NOT_FOUND_STR = _('There are no T-Dolls under this alias.')
+CMD_INFO_HELP_STR = _('Have Helian lookup entity information by name.')
+CMD_INFO_ENTITY_NOT_FOUND_STR = _('There are no entities under this alias.')
+CMD_INFO_SELECT_ENTITY_STR = _('Please select an entity.')
+CMD_INFO_BROAD_SEARCH_STR = _('Your query is too broad.')
 
 CMD_EXP_HELP_STR = _('Have Helian calculate the number of combat reports required for leveling T-Dolls.\n\n'
                      'Pass in "yes" or "no" or any amalgamation or abbreviation of those two for the "oath" parameter.')
@@ -137,7 +141,14 @@ CMD_DOLL_DOLL_NOT_FOUND_STR = _('There are no T-Dolls with the selected '
 
 CMD_STATS_HELP_STR = _('Get Helian\'s performance statistics.')
 
+CMD_DEPRECATED_WARNING_STR = _('This command has been **deprecated**. Please use `{prefix}{alternate}`.')
+CMD_DEPRECATED_STR = _('DEPRECATED.')
+
 
 def setup(*args) -> None:
     del args
     print(f'Loaded {__file__}')
+
+
+SUCCESS_COLOR = 0x00c853
+FAIL_COLOR = 0xd50000

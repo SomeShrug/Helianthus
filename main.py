@@ -2,10 +2,15 @@ import os
 import sys
 from os import path
 
-if __name__ == '__main__':
+
+def main():
     cwd = path.dirname(path.realpath(path.expanduser(__file__)))
     os.chdir(cwd)
-    sys.path.insert(0, path.join(cwd, 'src'))
-    import bot
+    sys.path.insert(0, path.join(cwd, 'helian'))
+    import helian
 
-    bot.main()
+    helian.main()
+
+
+if __name__ == '__main__':
+    main()
