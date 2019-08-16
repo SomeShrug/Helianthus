@@ -29,28 +29,24 @@ class Administration(commands.Cog):
             f'Please specify one of the available actions: '
             f'{", ".join(map(lambda command: mono(command.name), self.language_setting.commands))}')
 
-    @language_setting.group(name='set', invoke_without_command=True)
-    async def language_setter(self, ctx: commands.Context):
-        await ctx.send(
-            f'Please specify one of the available regions: '
-            f'{", ".join(map(lambda command: mono(command.name), self.language_setter.commands))}')
-
-    @language_setter.command(name='server', aliases=('sv',))
+    @language_setting.command(name='server', aliases=('sv',))
     async def set_server_language(self, ctx: commands.Context, language: str):
         if not Language.is_lang(language):
             locales = ", ".join(map(lambda lang: mono(lang.name), Language.__members__.values()))
             await ctx.send(_(CMD_SETLANG_UNKNOWN_LANGUAGE_STR).format(locales=locales))
         else:
             await SETMAN.set_slang(ctx, language)
+            await SETMAN.install_lang(ctx)
             await ctx.send(_(CMD_SETLANG_SUCCESS_STR).format(language=language.upper()))
 
-    @language_setter.command(name='channel', aliases=('ch',))
+    @language_setting.command(name='channel', aliases=('ch',))
     async def set_channel_language(self, ctx: commands.Context, language: str):
         if not Language.is_lang(language):
             locales = ", ".join(map(lambda lang: mono(lang.name), Language.__members__.values()))
             await ctx.send(_(CMD_SETCHLANG_UNKNOWN_LANGUAGE_STR).format(locales=locales))
         else:
             await SETMAN.set_chlang(ctx, language)
+            await SETMAN.install_lang(ctx)
             await ctx.send(_(CMD_SETCHLANG_SUCCESS_STR).format(language=language.upper()))
 
     @language_setting.command(name='unset', aliases=('u',))
