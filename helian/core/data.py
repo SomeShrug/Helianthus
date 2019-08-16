@@ -171,17 +171,23 @@ class DatabaseManager(object):
         with open('assets/exp_data.csv') as f:
             self._exp_data = tuple(map(int, f.read().split(',')))
 
+        with open('assets/fexp_data.csv') as f:
+            self._fexp_data = tuple(map(int, f.read().split(',')))
+
     @property
     def max_level(self):
         return len(self._exp_data)
 
-    def exp_from_level(self, level: int) -> int:
+    def exp_from_level(self, level: int, is_fairy: bool = False) -> int:
+        if is_fairy:
+            return self._fexp_data[level - 1]
         return self._exp_data[level - 1]
 
-    def level_from_exp(self, exp: int) -> Collection[int]:
-        if not 0 <= exp <= self._exp_data[-1]:
+    def level_from_exp(self, exp: int, is_fairy: bool = False) -> Collection[int]:
+        exp_tbl = self._fexp_data if is_fairy else self._exp_data
+        if not 0 <= exp <= exp_tbl[-1]:
             raise ValueError
-        temp = tuple(itertools.takewhile(lambda x: exp >= x, self._exp_data))
+        temp = tuple(itertools.takewhile(lambda x: exp >= x, exp_tbl))
         level = len(temp)
         leftover = exp - temp[-1]
         return level, leftover
@@ -218,10 +224,6 @@ class DatabaseManager(object):
     def close(self):
         self._c.close()
         self._db.close()
-
-
-def test():
-    print('hi')
 
 
 SETMAN = SettingsManager()

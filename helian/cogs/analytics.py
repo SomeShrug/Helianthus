@@ -1,9 +1,9 @@
 import asyncio
 import copy
 import itertools
+import math
 from typing import List, Optional
 
-import math
 from discord import Embed, Message
 from discord.ext import commands
 
@@ -116,6 +116,45 @@ class Analytics(commands.Cog):
         else:
             await ctx.send(_(CMD_EQUIP_EQUIP_NOT_FOUND_STR))
 
+    @commands.command(name='fexp', help=_(CMD_FEXP_HELP_STR))
+    async def get_fairy_combat_reports(self,
+                                       ctx: commands.Context,
+                                       start_level: int,
+                                       exp: int,
+                                       target_level: int):
+        color = FAIL_COLOR
+        if not 1 <= start_level <= 100:
+            msg = _(CMD_FEXP_INVALID_START_LEVEL_STR)
+        elif not 1 <= target_level <= 100:
+            msg = _(CMD_FEXP_INVALID_TARGET_LEVEL_STR)
+        elif target_level <= start_level:
+            msg = _(CMD_FEXP_TARGET_LESS_THAN_START_STR).format(level=start_level)
+        else:
+            start_exp = DBMAN.exp_from_level(start_level, True)
+            start_exp += exp
+            try:
+                actual_start, left_over = DBMAN.level_from_exp(start_exp, True)
+
+            except ValueError:
+                msg = _(CMD_EXP_INVALID_EXP_STR)
+            else:
+                if actual_start >= target_level:
+                    msg = _(CMD_EXP_REPORT_UNNCESSARY_STR)
+                else:
+                    color = SUCCESS_COLOR
+                    actual_exp = DBMAN.exp_from_level(actual_start, True) + left_over
+                    target_exp = DBMAN.exp_from_level(target_level, True)
+
+                    exp_diff = (target_exp - actual_exp)
+                    reports = math.ceil(exp_diff / 3000)
+                    msg = _(CMD_FEXP_OUTPUT_STR).format(start=actual_start,
+                                                        exp=left_over,
+                                                        target=target_level,
+                                                        reports=reports,
+                                                        exp_difference=exp_diff)
+        embed = Embed(color=color, description=msg)
+        await ctx.send(embed=embed)
+
     @commands.command(help=_(CMD_EXP_HELP_STR))
     async def exp(self,
                   ctx: commands.Context,
@@ -125,9 +164,9 @@ class Analytics(commands.Cog):
                   oath: Optional[bool] = False):
 
         color = FAIL_COLOR
-        if not 1 <= start_level <= DBMAN.max_level:
+        if not 1 <= start_level <= 120:
             msg = _(CMD_EXP_INVALID_START_LEVEL_STR)
-        elif not 1 <= target_level <= DBMAN.max_level:
+        elif not 1 <= target_level <= 120:
             msg = _(CMD_EXP_INVALID_TARGET_LEVEL_STR)
         elif target_level <= start_level:
             msg = _(CMD_EXP_TARGET_LESS_THAN_START_STR).format(level=start_level)
@@ -136,6 +175,7 @@ class Analytics(commands.Cog):
             start_exp += exp
             try:
                 actual_start, left_over = DBMAN.level_from_exp(start_exp)
+                print(actual_start)
 
             except ValueError:
                 msg = _(CMD_EXP_INVALID_EXP_STR)

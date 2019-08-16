@@ -125,6 +125,14 @@ CMD_EXP_INVALID_EXP_STR = _('Please enter a valid amount of EXP.')
 CMD_EXP_OUTPUT_STR = _('At **level {start}@({exp} EXP)**, to reach **level {target}** you will need **{reports}** '
                        'combat reports to cover {exp_difference} EXP.')
 
+CMD_FEXP_HELP_STR = _('Have Helian calculate the number of combat reports required for leveling T-Dolls.')
+CMD_FEXP_INVALID_START_LEVEL_STR = _('Please enter a valid starting level between 1 and 100.')
+CMD_FEXP_INVALID_TARGET_LEVEL_STR = _('Please enter a valid target level between 1 and 100.')
+CMD_FEXP_TARGET_LESS_THAN_START_STR = _('Please enter a target level greater than {level}.')
+CMD_FEXP_REPORT_UNNCESSARY_STR = _('You do not need any combat reports.')
+CMD_FEXP_INVALID_EXP_STR = _('Please enter a valid amount of EXP.')
+CMD_FEXP_OUTPUT_STR = CMD_EXP_OUTPUT_STR
+
 CMD_EQUIP_HELP_STR = _('Have Helian retrieve equipment with the given production time.\n\n'
                        'Enter a time in either the %H:%M or %H%M format, where %H is an optionally 0-padded two-digit '
                        'hour and %M is an optionally 0-padded two-digit minute.\n\n'
